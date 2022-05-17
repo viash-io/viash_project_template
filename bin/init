@@ -9,7 +9,7 @@ cd "$REPO_ROOT"
 # download viash and viash project executables
 curl -fsSL get.viash.io | bash -s -- \
   --registry ghcr.io \
-  --organisation viash-io \
+  --organisation viash-io/viash_project_template \
   --target_image_source https://github.com/viash-io/viash_project_template \
   --tag 0.5.11 \
   --nextflow_variant vdsl3
