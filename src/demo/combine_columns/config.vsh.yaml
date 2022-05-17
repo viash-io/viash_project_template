@@ -16,7 +16,7 @@ functionality:
     - type: r_script
       path: script.R
 platforms:
+  - type: docker
+    image: rocker/r-ver:4.1
   - type: nextflow
     variant: vdsl3
-    directives:
-      container: rocker/r-ver:4.1

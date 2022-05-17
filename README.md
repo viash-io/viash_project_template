@@ -27,9 +27,15 @@ Build Viash components
 ``` sh
 > bin/viash_build
 In development mode with 'dev'.
+Exporting combine_columns (demo) =docker=> target/docker/demo/combine_columns
 Exporting combine_columns (demo) =nextflow=> target/nextflow/demo/combine_columns
-Exporting remove_comments (demo) =nextflow=> target/nextflow/demo/remove_comments
+Exporting take_column (demo) =docker=> target/docker/demo/take_column
+Exporting remove_comments (demo) =docker=> target/docker/demo/remove_comments
 Exporting take_column (demo) =nextflow=> target/nextflow/demo/take_column
+Exporting remove_comments (demo) =nextflow=> target/nextflow/demo/remove_comments
+[notice] Building container 'demo_take_column:dev' with Dockerfile
+[notice] Building container 'demo_remove_comments:dev' with Dockerfile
+[notice] Building container 'demo_combine_columns:dev' with Dockerfile
 ```
 
 Run demo pipeline
@@ -43,11 +49,11 @@ bin/nextflow run . \
 ```
 
     N E X T F L O W  ~  version 22.04.2
-    Launching workflows/demo_pipeline/main.nf` [nice_bohr] DSL2 - revision: 6366c63adb
-    [69/da3072] Submitted process > remove_comments:remove_comments_process (1)
-    [c7/b238f3] Submitted process > take_column:take_column_process (1)
-    [a1/ea56de] Submitted process > combine_columns:combine_columns_process
-    Output: [combined, work/a1/ea56de2c914eeea820b7891f93f9f7/combined.combine_columns.output]
+    Launching workflows/demo_pipeline/main.nf` [stoic_galileo] DSL2 - revision: 6366c63adb
+    [6f/6cf294] Submitted process > remove_comments:remove_comments_process (1)
+    [e2/93f6e7] Submitted process > take_column:take_column_process (1)
+    [d4/d18eb9] Submitted process > combine_columns:combine_columns_process
+    Output: [combined, work/d4/d18eb96d1ee83aaa1abe31a5825eb3/combined.combine_columns.output]
 
 ## Contents of this template
 

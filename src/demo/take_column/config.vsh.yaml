@@ -19,7 +19,10 @@ functionality:
   - type: python_script
     path: script.py
 platforms:
+  - type: docker
+    image: python:3.10
+    setup:
+      - type: python
+        packages: pandas
   - type: nextflow
     variant: vdsl3
-    directives:
-      container: amancevice/pandas:slim

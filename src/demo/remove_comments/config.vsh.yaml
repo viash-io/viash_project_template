@@ -16,8 +16,11 @@ functionality:
   resources:
   - type: bash_script
     path: script.sh
+  tests:
+  - type: bash_script
+    path: test.sh
 platforms:
+  - type: docker
+    image: ubuntu:20.04
   - type: nextflow
     variant: vdsl3
-    directives:
-      container: ubuntu:20.04
