@@ -2,9 +2,9 @@ nextflow.enable.dsl=2
 
 targetDir = "${params.rootDir}/target/nextflow"
 
-include { remove_comments } from "$targetDir/my_namespace/remove_comments/main.nf"
-include { take_column } from "$targetDir/my_namespace/take_column/main.nf"
-include { combine_columns } from "$targetDir/my_namespace/combine_columns/main.nf"
+include { remove_comments } from "$targetDir/demo/remove_comments/main.nf"
+include { take_column }     from "$targetDir/demo/take_column/main.nf"
+include { combine_columns } from "$targetDir/demo/combine_columns/main.nf"
 
 workflow {
   Channel.fromPath(params.input)
@@ -37,5 +37,5 @@ workflow {
     | combine_columns
 
     // View channel contents
-    | view { file -> "Output: $file" }
+    | view { tup -> "Output: $tup" }
 }
