@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# get the root of the directory
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# ensure that the command below is run from the root of the repository
+cd "$REPO_ROOT"
+
+# download viash and viash project executables
+curl -fsSL get.viash.io | bash -s -- \
+  --registry ghcr.io \
+  --organisation viash-io \
+  --target_image_source https://github.com/viash-io/viash_project_template \
+  --tag 0.5.11 \
+  --nextflow_variant vdsl3
+
+# download nextflow
+cd bin
+curl -s https://get.nextflow.io | bash
