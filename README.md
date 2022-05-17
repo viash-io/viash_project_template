@@ -27,14 +27,14 @@ Build Viash components
 ``` sh
 > bin/viash_build
 In development mode with 'dev'.
-Exporting take_column (demo) =docker=> target/docker/demo/take_column
-Exporting combine_columns (demo) =docker=> target/docker/demo/combine_columns
-Exporting combine_columns (demo) =nextflow=> target/nextflow/demo/combine_columns
-Exporting take_column (demo) =nextflow=> target/nextflow/demo/take_column
 Exporting remove_comments (demo) =nextflow=> target/nextflow/demo/remove_comments
+Exporting combine_columns (demo) =docker=> target/docker/demo/combine_columns
+Exporting take_column (demo) =nextflow=> target/nextflow/demo/take_column
+Exporting take_column (demo) =docker=> target/docker/demo/take_column
 Exporting remove_comments (demo) =docker=> target/docker/demo/remove_comments
-[notice] Building container 'demo_take_column:dev' with Dockerfile
+Exporting combine_columns (demo) =nextflow=> target/nextflow/demo/combine_columns
 [notice] Building container 'demo_combine_columns:dev' with Dockerfile
+[notice] Building container 'demo_take_column:dev' with Dockerfile
 [notice] Building container 'demo_remove_comments:dev' with Dockerfile
 ```
 
@@ -49,11 +49,11 @@ bin/nextflow run . \
 ```
 
     N E X T F L O W  ~  version 22.04.2
-    Launching workflows/demo_pipeline/main.nf` [deadly_mirzakhani] DSL2 - revision: 6366c63adb
-    [1e/417a29] Submitted process > remove_comments:remove_comments_process (1)
-    [22/6b535b] Submitted process > take_column:take_column_process (1)
-    [b8/3f68c2] Submitted process > combine_columns:combine_columns_process
-    Output: [combined, work/b8/3f68c2a00dc915883aabe8b5804126/combined.combine_columns.output]
+    Launching workflows/demo_pipeline/main.nf` [berserk_lalande] DSL2 - revision: 6366c63adb
+    [76/0e82bc] Submitted process > remove_comments:remove_comments_process (1)
+    [00/771b69] Submitted process > take_column:take_column_process (1)
+    [54/e5a5b8] Submitted process > combine_columns:combine_columns_process
+    Output: [combined, work/54/e5a5b8929e0a967904cdad0c5fe8cb/combined.combine_columns.output]
 
 ## Contents of this template
 
@@ -87,19 +87,32 @@ If you want to start from a clean repository, remove the contents of the
 You can unit test all Viash components using the following command:
 
 ``` sh
-> bin/viash_test
-In development mode with 'dev'.
-           namespace        functionality             platform            test_name exit_code duration               result[0m
-                demo      combine_columns               docker                start                                        [0m
-                demo      remove_comments               docker                start                                        [0m
-                demo          take_column               docker                start                                        [0m
-[32m                demo      combine_columns               docker     build_executable         0        0              SUCCESS[0m
-[33m                demo      combine_columns               docker                tests        -1        0              MISSING[0m
-[32m                demo          take_column               docker     build_executable         0        0              SUCCESS[0m
-[33m                demo          take_column               docker                tests        -1        0              MISSING[0m
-[32m                demo      remove_comments               docker     build_executable         0        0              SUCCESS[0m
-[32m                demo      remove_comments               docker              test.sh         0        2              SUCCESS[0m
+> bin/viash_test > /dev/null
 ```
+
+Contents of `.viash_log_test.tsv`:
+
+| namespace | functionality   | platform | test_name        | exit_code | duration | result  |
+|:----------|:----------------|:---------|:-----------------|:----------|:---------|:--------|
+| demo      | remove_comments | docker   | build_executable | 1         | 1        | ERROR   |
+| demo      | combine_columns | docker   | build_executable | 0         | 3        | SUCCESS |
+| demo      | combine_columns | docker   | tests            | -1        | 0        | MISSING |
+| demo      | take_column     | docker   | build_executable | 0         | 4        | SUCCESS |
+| demo      | take_column     | docker   | tests            | -1        | 0        | MISSING |
+| namespace | functionality   | platform | test_name        | exit_code | duration | result  |
+| demo      | combine_columns | docker   | build_executable | 0         | 0        | SUCCESS |
+| demo      | combine_columns | docker   | tests            | -1        | 0        | MISSING |
+| demo      | take_column     | docker   | build_executable | 0         | 0        | SUCCESS |
+| demo      | take_column     | docker   | tests            | -1        | 0        | MISSING |
+| demo      | remove_comments | docker   | build_executable | 0         | 0        | SUCCESS |
+| demo      | remove_comments | docker   | test.sh          | 0         | 2        | SUCCESS |
+| namespace | functionality   | platform | test_name        | exit_code | duration | result  |
+| demo      | combine_columns | docker   | build_executable | 0         | 0        | SUCCESS |
+| demo      | combine_columns | docker   | tests            | -1        | 0        | MISSING |
+| demo      | take_column     | docker   | build_executable | 0         | 0        | SUCCESS |
+| demo      | take_column     | docker   | tests            | -1        | 0        | MISSING |
+| demo      | remove_comments | docker   | build_executable | 0         | 0        | SUCCESS |
+| demo      | remove_comments | docker   | test.sh          | 0         | 2        | SUCCESS |
 
 ## Building a release
 
@@ -169,11 +182,11 @@ bin/nextflow run https://github.com/viash-io/viash_project_template \
 
     N E X T F L O W  ~  version 22.04.2
     Pulling viash-io/viash_project_template ...
-    Launching `https://github.com/viash-io/viash_project_template` [lonely_hopper] DSL2 - revision: c3c4b9fe67 [0.1.0]
-    [2f/a2e520] Submitted process > remove_comments:remove_comments_process (1)
-    [7e/0c3a65] Submitted process > take_column:take_column_process (1)
-    [89/b0986a] Submitted process > combine_columns:combine_columns_process
-    Output: [combined, work/89/b0986a04f1d741e1bb94bd0a6ee05c/combined.combine_columns.output]
+    Launching `https://github.com/viash-io/viash_project_template` [thirsty_faggin] DSL2 - revision: c3c4b9fe67 [0.1.0]
+    [f0/a66f2e] Submitted process > remove_comments:remove_comments_process (1)
+    [fa/a1c296] Submitted process > take_column:take_column_process (1)
+    [d6/06feaa] Submitted process > combine_columns:combine_columns_process
+    Output: [combined, work/d6/06feaa7e0ab326f7cd8b0a1895e30b/combined.combine_columns.output]
 
 Since all the components and containers are published on Github, this
 pipeline should be 100% reproducible.

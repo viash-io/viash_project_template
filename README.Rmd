@@ -91,8 +91,14 @@ If you want to start from a clean repository, remove the contents of the `resour
 
 You can unit test all Viash components using the following command:
 
+
 ```{sh}
-bin/viash_test
+bin/viash_test > /dev/null
+```
+
+Contents of `.viash_log_test.tsv`:
+```{r results="asis", echo=FALSE, warning=FALSE, error=FALSE, message=FALSE}
+knitr::kable(readr::read_tsv(".viash_log_test.tsv"))
 ```
 
 ## Building a release
