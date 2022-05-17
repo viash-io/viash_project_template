@@ -91,7 +91,7 @@ If you want to start from a clean repository, remove the contents of the `resour
 
 You can unit test all Viash components using the following command:
 
-```sh
+```{sh}
 bin/viash_test
 ```
 
@@ -103,13 +103,23 @@ branch, merge all changes from the main branch, build all components
 and push the new release to Github and the containers to your Docker
 registry of choice.
 
+One time setup
 ```sh
+# clone repo
+git clone git@github.com:myusername/demo_pipeline.git demo_pipeline_release
+cd demo_pipeline_release
+
 # switch to release branch
 git checkout release
 
 # allow publishing the target folder
-sed -i '/^target$/d' .gitignore
+sed -i '/^target.*/d' .gitignore
+git add .gitignore
+git commit -m "update gitignore for release"
+```
 
+For every build
+```sh
 TAG=0.1.0
 
 rm -r target
@@ -135,7 +145,7 @@ git tag -a "$TAG" -m "Release $TAG"
 git push --tags
 ```
 
-## Running production version
+## Running a pipeline from release
 
 When a release has been made, you can run the pipeline as follows:
 
@@ -148,6 +158,19 @@ bin/nextflow run https://github.com/viash-io/viash_project_template \
   --input resources_test/file*.tsv \
   --publishDir temp
 ```
+```{sh echo=FALSE}
+bin/nextflow run https://github.com/viash-io/viash_project_template \
+  -main-script workflows/demo_pipeline/main.nf \
+  -r 0.1.0 \
+  -resume -latest \
+  -with-docker \
+  --input resources_test/file*.tsv \
+  --publishDir temp |
+  sed 's#[^ ]*work#work#g'
+```
+
+Since all the components and containers are published on Github, this
+pipeline should be 100% reproducible.
 
 ## Documentation
 

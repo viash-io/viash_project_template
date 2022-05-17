@@ -27,15 +27,15 @@ Build Viash components
 ``` sh
 > bin/viash_build
 In development mode with 'dev'.
+Exporting take_column (demo) =docker=> target/docker/demo/take_column
 Exporting combine_columns (demo) =docker=> target/docker/demo/combine_columns
 Exporting combine_columns (demo) =nextflow=> target/nextflow/demo/combine_columns
-Exporting take_column (demo) =docker=> target/docker/demo/take_column
-Exporting remove_comments (demo) =docker=> target/docker/demo/remove_comments
 Exporting take_column (demo) =nextflow=> target/nextflow/demo/take_column
 Exporting remove_comments (demo) =nextflow=> target/nextflow/demo/remove_comments
+Exporting remove_comments (demo) =docker=> target/docker/demo/remove_comments
 [notice] Building container 'demo_take_column:dev' with Dockerfile
-[notice] Building container 'demo_remove_comments:dev' with Dockerfile
 [notice] Building container 'demo_combine_columns:dev' with Dockerfile
+[notice] Building container 'demo_remove_comments:dev' with Dockerfile
 ```
 
 Run demo pipeline
@@ -49,11 +49,11 @@ bin/nextflow run . \
 ```
 
     N E X T F L O W  ~  version 22.04.2
-    Launching workflows/demo_pipeline/main.nf` [stoic_galileo] DSL2 - revision: 6366c63adb
-    [6f/6cf294] Submitted process > remove_comments:remove_comments_process (1)
-    [e2/93f6e7] Submitted process > take_column:take_column_process (1)
-    [d4/d18eb9] Submitted process > combine_columns:combine_columns_process
-    Output: [combined, work/d4/d18eb96d1ee83aaa1abe31a5825eb3/combined.combine_columns.output]
+    Launching workflows/demo_pipeline/main.nf` [deadly_mirzakhani] DSL2 - revision: 6366c63adb
+    [1e/417a29] Submitted process > remove_comments:remove_comments_process (1)
+    [22/6b535b] Submitted process > take_column:take_column_process (1)
+    [b8/3f68c2] Submitted process > combine_columns:combine_columns_process
+    Output: [combined, work/b8/3f68c2a00dc915883aabe8b5804126/combined.combine_columns.output]
 
 ## Contents of this template
 
@@ -87,7 +87,18 @@ If you want to start from a clean repository, remove the contents of the
 You can unit test all Viash components using the following command:
 
 ``` sh
-bin/viash_test
+> bin/viash_test
+In development mode with 'dev'.
+           namespace        functionality             platform            test_name exit_code duration               result[0m
+                demo      combine_columns               docker                start                                        [0m
+                demo      remove_comments               docker                start                                        [0m
+                demo          take_column               docker                start                                        [0m
+[32m                demo      combine_columns               docker     build_executable         0        0              SUCCESS[0m
+[33m                demo      combine_columns               docker                tests        -1        0              MISSING[0m
+[32m                demo          take_column               docker     build_executable         0        0              SUCCESS[0m
+[33m                demo          take_column               docker                tests        -1        0              MISSING[0m
+[32m                demo      remove_comments               docker     build_executable         0        0              SUCCESS[0m
+[32m                demo      remove_comments               docker              test.sh         0        2              SUCCESS[0m
 ```
 
 ## Building a release
@@ -98,13 +109,25 @@ branch, merge all changes from the main branch, build all components and
 push the new release to Github and the containers to your Docker
 registry of choice.
 
+One time setup
+
 ``` sh
+# clone repo
+git clone git@github.com:myusername/demo_pipeline.git demo_pipeline_release
+cd demo_pipeline_release
+
 # switch to release branch
 git checkout release
 
 # allow publishing the target folder
-sed -i '/^target$/d' .gitignore
+sed -i '/^target.*/d' .gitignore
+git add .gitignore
+git commit -m "update gitignore for release"
+```
 
+For every build
+
+``` sh
 TAG=0.1.0
 
 rm -r target
@@ -130,7 +153,7 @@ git tag -a "$TAG" -m "Release $TAG"
 git push --tags
 ```
 
-## Running production version
+## Running a pipeline from release
 
 When a release has been made, you can run the pipeline as follows:
 
@@ -143,6 +166,17 @@ bin/nextflow run https://github.com/viash-io/viash_project_template \
   --input resources_test/file*.tsv \
   --publishDir temp
 ```
+
+    N E X T F L O W  ~  version 22.04.2
+    Pulling viash-io/viash_project_template ...
+    Launching `https://github.com/viash-io/viash_project_template` [lonely_hopper] DSL2 - revision: c3c4b9fe67 [0.1.0]
+    [2f/a2e520] Submitted process > remove_comments:remove_comments_process (1)
+    [7e/0c3a65] Submitted process > take_column:take_column_process (1)
+    [89/b0986a] Submitted process > combine_columns:combine_columns_process
+    Output: [combined, work/89/b0986a04f1d741e1bb94bd0a6ee05c/combined.combine_columns.output]
+
+Since all the components and containers are published on Github, this
+pipeline should be 100% reproducible.
 
 ## Documentation
 
