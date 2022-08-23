@@ -11,7 +11,7 @@ curl -fsSL get.viash.io | bash -s -- \
   --registry ghcr.io \
   --organisation viash-io/viash_project_template \
   --target_image_source https://github.com/viash-io/viash_project_template \
-  --tag 0.5.12 \
+  --tag 0.5.15 \
   --nextflow_variant vdsl3
 
 # download nextflow
