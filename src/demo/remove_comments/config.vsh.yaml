@@ -13,10 +13,13 @@ functionality:
       required: true
       direction: output
       example: "file.tsv"
+    - type: string
+      name: --id
+      default: "remove_comments"
   resources:
   - type: bash_script
     path: script.sh
-  tests:
+  test_resources:
   - type: bash_script
     path: test.sh
 platforms:
