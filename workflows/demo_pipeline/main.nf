@@ -34,7 +34,9 @@ workflow {
 
     // Concatenate TSVs into one
     //   (String, {input: List[File]}) -> (String, File)
-    | combine_columns
+    | combine_columns.run(
+      auto: [ publish: true ]
+      )
 
     // View channel contents
     | view { tup -> "Output: $tup" }
