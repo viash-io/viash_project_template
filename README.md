@@ -144,7 +144,7 @@ git commit -m "update gitignore for release"
 For every build
 
 ``` sh
-TAG=0.1.0
+TAG=0.2.0
 
 rm -r target
 git fetch origin
@@ -176,7 +176,7 @@ When a release has been made, you can run the pipeline as follows:
 ``` sh
 bin/nextflow run https://github.com/viash-io/viash_project_template \
   -main-script workflows/demo_pipeline/main.nf \
-  -r 0.1.0 \
+  -r 0.2.0 \
   -resume -latest \
   -with-docker \
   --input resources_test/file*.tsv \
