@@ -19,14 +19,14 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Fetch viash
-      run: |
-        bin/init
-        bin/viash -h
+    - uses: actions/checkout@v3
+
+    - uses: viash-io/viash-actions/setup@v1.0.0
+
     - id: set_matrix
       run: |
-        echo "::set-output name=matrix::$( bin/viash ns list -p docker --format json | jq -c '[ .[] | .info.config ]' )"
+        echo "::set-output name=matrix::$( viash ns list -p docker --format json | jq -c '[ .[] | .info.config ]' )"
+
     outputs:
         matrix: ${{ steps.set_matrix.outputs.matrix }}
 
@@ -43,14 +43,11 @@ jobs:
         component_path: ${{ fromJson(needs.list_components.outputs.matrix) }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Fetch viash
-      run: |
-        bin/init
-        bin/viash -h
+    - uses: viash-io/viash-actions/setup@v1.0.0
 
     - name: Run test
       run: |
-        bin/viash test -p docker ${{ matrix.component_path }}
+        viash test -p docker ${{ matrix.component_path }}
 

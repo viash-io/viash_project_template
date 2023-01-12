@@ -1,3 +1,9 @@
+# viash_project_template 0.2.0
+
+* Update viash to 0.6.7. This also fixes an error when nextflow complains that `scriptPath` is not defined.
+
+* Replace 'underscore' (like `viash_build`) commands with equivalent 'ns' command (`viash ns build`).
+
 # viash_project_template 0.1.0
 
 First release of the project template repository.

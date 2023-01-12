@@ -13,21 +13,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Fetch viash
-      run: |
-        bin/init
-        bin/viash -h
+    - uses: viash-io/viash-actions/setup@v1.0.0
 
     - name: Build target dir
       run: |
         # allow publishing the target folder
         sed -i '/^target.*/d' .gitignore
 
-        # force override viash build strategy to not build containers
-        sed -i 's#--setup "\\$setup_strat"#--setup donothing#' bin/viash_build
-
         # build target dir
-        bin/viash_build -m release -t main_build
+        viash ns build --config_mod ".functionality.version := 'main_build'" --parallel  --setup donothing
 
     - name: Deploy to target branch
       uses: peaceiris/actions-gh-pages@v3
@@ -38,7 +32,7 @@ jobs:
 
     - id: set_matrix
       run: |
-        echo "::set-output name=matrix::$( bin/viash ns list -p docker --format json | jq -c '[ .[] | .info.config ]' )"
+        echo "::set-output name=matrix::$( viash ns list -p docker --format json | jq -c '[ .[] | .info.config ]' )"
 
     outputs:
         matrix: ${{ steps.set_matrix.outputs.matrix }}
@@ -58,15 +52,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Fetch viash
-      run: |
-        bin/init
-        bin/viash -h
+    - uses: viash-io/viash-actions/setup@v1.0.0
 
     - name: Build container
       run: |
         SRC_DIR=`dirname ${{ matrix.component_path }}`
-        bin/viash_build -m release -t main_build -s "$SRC_DIR"
+        viash ns build --config_mod ".functionality.version := 'main_build'" -s "$SRC_DIR" --setup build
         
     - name: Login to container registry
       uses: docker/login-action@v1
@@ -77,4 +68,4 @@ jobs:
 
     - name: Push containers
       run: |
-        bin/viash_push -m release -t main_build --force
+        viash build ${{ matrix.component_path }} -p docker --config_mod ".functionality.version := 'main_build'"  --setup push
