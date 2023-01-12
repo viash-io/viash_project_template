@@ -11,3 +11,4 @@ work/
 # Viash
 .viash_log*
 target
+bin
