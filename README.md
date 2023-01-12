@@ -1,12 +1,12 @@
+Viash project template
+================
 
-<!-- README.md is generated from README.Rmd using rmarkdown. Please edit that file -->
+<!-- README.md is generated from README.qmd using quarto render. Please edit that file -->
 <p align="center">
 <a href="https://viash.io/">
 <img alt="viash" src="https://viash.io/logo/viash_large.svg" width="300">
 </a>
 </p>
-
-# Viash project template
 
 This repository is a template for setting up a new
 [Viash](https://viash.io) project.
@@ -19,29 +19,37 @@ development build of the pipeline.
 Install Viash and Nextflow:
 
 ``` sh
-bin/init
+# download viash in the bin folder
+curl -fsSL get.viash.io | bash -s -- --tools false
+
+# also download nextflow in the bin folder
+cd bin
+curl -s https://get.nextflow.io | bash
+cd ..
 ```
 
 Build Viash components
 
 ``` sh
-> bin/viash ns build --setup cachedbuild
-Exporting take_column (demo) =docker=> /home/di/code/advanced_pipeline/target/docker/demo/take_column
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile
-Exporting take_column (demo) =nextflow=> /home/di/code/advanced_pipeline/target/nextflow/demo/take_column
-Exporting remove_comments (demo) =docker=> /home/di/code/advanced_pipeline/target/docker/demo/remove_comments
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile
-Exporting remove_comments (demo) =nextflow=> /home/di/code/advanced_pipeline/target/nextflow/demo/remove_comments
-Exporting combine_columns (demo) =docker=> /home/di/code/advanced_pipeline/target/docker/demo/combine_columns
-[notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_combine_columns:dev' with Dockerfile
-Exporting combine_columns (demo) =nextflow=> /home/di/code/advanced_pipeline/target/nextflow/demo/combine_columns
-[32mAll 6 configs built successfully[0m
+bin/viash ns build --setup cachedbuild --parallel
 ```
+
+    Exporting combine_columns (demo) =docker=> /home/rcannood/workspace/viash-io/viash_project_template/target/docker/demo/combine_columns
+    Exporting take_column (demo) =docker=> /home/rcannood/workspace/viash-io/viash_project_template/target/docker/demo/take_column
+    Exporting combine_columns (demo) =nextflow=> /home/rcannood/workspace/viash-io/viash_project_template/target/nextflow/demo/combine_columns
+    Exporting remove_comments (demo) =docker=> /home/rcannood/workspace/viash-io/viash_project_template/target/docker/demo/remove_comments
+    Exporting remove_comments (demo) =nextflow=> /home/rcannood/workspace/viash-io/viash_project_template/target/nextflow/demo/remove_comments
+    Exporting take_column (demo) =nextflow=> /home/rcannood/workspace/viash-io/viash_project_template/target/nextflow/demo/take_column
+    [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_combine_columns:dev' with Dockerfile
+    [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_take_column:dev' with Dockerfile
+    [notice] Building container 'ghcr.io/viash-io/viash_project_template/demo_remove_comments:dev' with Dockerfile
+    All 6 configs built successfully
 
 Run demo pipeline
 
 ``` sh
-bin/nextflow run . \
+NXF_VER=22.10.4 bin/nextflow \
+  run . \
   -main-script workflows/demo_pipeline/main.nf \
   -with-docker \
   --input resources_test/file*.tsv \
@@ -49,11 +57,11 @@ bin/nextflow run . \
 ```
 
     N E X T F L O W  ~  version 22.10.4
-    Launching workflows/demo_pipeline/main.nf` [pedantic_pesquet] DSL2 - revision: c65d4e7bba
-    [8c/396e38] Submitted process > remove_comments:remove_comments_process (file1)
-    [1d/494937] Submitted process > take_column:take_column_process (file1)
-    [db/d56247] Submitted process > combine_columns:combine_columns_process (combined)
-    Output: [combined, work/db/d562475c627456be5c878815e8322a/combined.combine_columns.output]
+    Launching workflows/demo_pipeline/main.nf` [maniac_hodgkin] DSL2 - revision: c65d4e7bba
+    [c4/65f41c] Submitted process > remove_comments:remove_comments_process (file1)
+    [11/4e7d33] Submitted process > take_column:take_column_process (file1)
+    [d3/002523] Submitted process > combine_columns:combine_columns_process (combined)
+    Output: [combined, work/d3/00252389ac0bc69e1f2308c90791dc/combined.combine_columns.output]
 
 ## Contents of this template
 
@@ -96,28 +104,29 @@ If you want to start from a clean repository, remove the contents of the
 You can unit test all Viash components using the following command:
 
 ``` sh
-> bin/viash ns test
-The working directory for the namespace tests is /tmp/viash_ns_test17888051167639735719
-           namespace        functionality             platform            test_name exit_code duration               result[0m
-                demo          take_column               docker                start                                        [0m
-[32m                demo          take_column               docker     build_executable         0        0              SUCCESS[0m
-[33m                demo          take_column               docker                tests        -1        0              MISSING[0m
-no tests found
-====================================================================
-                demo      remove_comments               docker                start                                        [0m
-[32m                demo      remove_comments               docker     build_executable         0        0              SUCCESS[0m
-[32m                demo      remove_comments               docker              test.sh         0        1              SUCCESS[0m
-                demo      combine_columns               docker                start                                        [0m
-[32m                demo      combine_columns               docker     build_executable         0        0              SUCCESS[0m
-[33m                demo      combine_columns               docker                tests        -1        0              MISSING[0m
-no tests found
-====================================================================
-[33mNot all configs built and tested successfully[0m
-  [33m2/6 tests missing[0m
-  [32m4/6 configs built and tested successfully[0m
+bin/viash ns test --parallel
 ```
 
-## Building a release
+    The working directory for the namespace tests is /home/rcannood/workspace/viash_temp/viash_ns_test16160570057869067283
+               namespace        functionality             platform            test_name exit_code duration               result
+                    demo      combine_columns               docker                start                                        
+                    demo      remove_comments               docker                start                                        
+                    demo          take_column               docker                start                                        
+                    demo      combine_columns               docker     build_executable         0        7              SUCCESS
+                    demo      combine_columns               docker                tests        -1        0              MISSING
+    no tests found
+    ====================================================================
+                    demo      remove_comments               docker     build_executable         0        5              SUCCESS
+                    demo      remove_comments               docker              test.sh         0        4              SUCCESS
+                    demo          take_column               docker     build_executable         0       12              SUCCESS
+                    demo          take_column               docker                tests        -1        0              MISSING
+    no tests found
+    ====================================================================
+    Not all configs built and tested successfully
+      2/6 tests missing
+      4/6 configs built and tested successfully
+
+## Creating a release (manually)
 
 The script below assumes you have a separate clone of this repository
 specifically for building a release. To do so, switch to the release
@@ -146,15 +155,16 @@ For every build
 ``` sh
 TAG=0.2.0
 
+# merge latest changes in the release branch
 rm -r target
 git fetch origin
 git merge origin/main
 
 # build target folder and docker containers
-bin/viash ns build --setup build --config_mod ".functionality.version := '$TAG'" -l
+bin/viash ns build --setup build --config_mod ".functionality.version := '$TAG'" --parallel
 
 # run unit tests (ideally, these should all pass)
-bin/viash ns test --config_mod ".functionality.version := '$TAG'"
+bin/viash ns test --config_mod ".functionality.version := '$TAG'" --parallel
 
 # push docker containers to container registry
 bin/viash ns build --config_mod ".functionality.version := '$TAG'" --setup push
@@ -174,7 +184,8 @@ git push --tags
 When a release has been made, you can run the pipeline as follows:
 
 ``` sh
-bin/nextflow run https://github.com/viash-io/viash_project_template \
+NXF_VER=22.10.4 bin/nextflow \
+  run https://github.com/viash-io/viash_project_template \
   -main-script workflows/demo_pipeline/main.nf \
   -r 0.2.0 \
   -resume -latest \
@@ -183,13 +194,9 @@ bin/nextflow run https://github.com/viash-io/viash_project_template \
   --publishDir temp
 ```
 
+    Cannot find revision `0.2.0` -- Make sure that it exists in the remote repository `https://github.com/viash-io/viash_project_template`
     N E X T F L O W  ~  version 22.10.4
     Pulling viash-io/viash_project_template ...
-    Launching `https://github.com/viash-io/viash_project_template` [gloomy_celsius] DSL2 - revision: c3c4b9fe67 [0.1.0]
-    Error executing process > 'remove_comments:remove_comments_process (1)'
-
-    Caused by:
-      Module scriptPath has not been defined yet
 
 Since all the components and containers are published on Github, this
 pipeline should be 100% reproducible.

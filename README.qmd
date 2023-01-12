@@ -1,30 +1,22 @@
 ---
+title: Viash project template
 format: gfm
-toc: false
 engine: knitr
+toc: false
 ---
 
+<!-- README.md is generated from README.qmd using quarto render. Please edit that file -->
 
-```{r setup, include = FALSE}
-# set default chunk options
-knitr::opts_chunk$set(
-  echo = TRUE,
-  comment = "",
-  collapse = TRUE,
-  prompt = TRUE
-)
-Sys.setenv(NXF_ANSI_LOG = "FALSE")
+```{r setup, include=FALSE}
+# why is R not picking this up automatically??
+source(".Rprofile")
 ```
-
-<!-- README.md is generated from README.Rmd using quarto render. Please edit that file -->
 
 <p align="center">
   <a href="https://viash.io/">
     <img alt="viash" src="https://viash.io/logo/viash_large.svg" width="300">
   </a>
 </p>
-
-# Viash project template
 
 This repository is a template for setting up a new [Viash](https://viash.io) project.
 
@@ -34,24 +26,32 @@ development build of the pipeline.
 
 Install Viash and Nextflow:
 ```sh
-bin/init
+# download viash in the bin folder
+curl -fsSL get.viash.io | bash -s -- --tools false
+
+# also download nextflow in the bin folder
+cd bin
+curl -s https://get.nextflow.io | bash
+cd ..
 ```
 
 Build Viash components
 ```{sh}
-bin/viash ns build --setup cachedbuild
+bin/viash ns build --setup cachedbuild --parallel
 ```
 
 Run demo pipeline
 ```sh
-bin/nextflow run . \
+NXF_VER=22.10.4 bin/nextflow \
+  run . \
   -main-script workflows/demo_pipeline/main.nf \
   -with-docker \
   --input resources_test/file*.tsv \
   --publishDir temp
 ```
 ```{sh echo=FALSE}
-bin/nextflow run . \
+NXF_VER=22.10.4 bin/nextflow \
+  run . \
   -main-script workflows/demo_pipeline/main.nf \
   -with-docker \
   --input resources_test/file*.tsv \
@@ -101,11 +101,16 @@ You can unit test all Viash components using the following command:
 
 
 ```{sh}
-bin/viash ns test
+bin/viash ns test --parallel
 ```
 
+::: {.content-hidden}
+## Creating a release with a GitHub Action
 
-## Building a release
+<!-- todo: describe procedure -->
+:::
+
+## Creating a release (manually)
 
 The script below assumes you have a separate clone of this repository
 specifically for building a release. To do so, switch to the release
@@ -132,15 +137,16 @@ For every build
 ```sh
 TAG=0.2.0
 
+# merge latest changes in the release branch
 rm -r target
 git fetch origin
 git merge origin/main
 
 # build target folder and docker containers
-bin/viash ns build --setup build --config_mod ".functionality.version := '$TAG'" -l
+bin/viash ns build --setup build --config_mod ".functionality.version := '$TAG'" --parallel
 
 # run unit tests (ideally, these should all pass)
-bin/viash ns test --config_mod ".functionality.version := '$TAG'"
+bin/viash ns test --config_mod ".functionality.version := '$TAG'" --parallel
 
 # push docker containers to container registry
 bin/viash ns build --config_mod ".functionality.version := '$TAG'" --setup push
@@ -160,7 +166,8 @@ git push --tags
 When a release has been made, you can run the pipeline as follows:
 
 ```sh
-bin/nextflow run https://github.com/viash-io/viash_project_template \
+NXF_VER=22.10.4 bin/nextflow \
+  run https://github.com/viash-io/viash_project_template \
   -main-script workflows/demo_pipeline/main.nf \
   -r 0.2.0 \
   -resume -latest \
@@ -169,7 +176,8 @@ bin/nextflow run https://github.com/viash-io/viash_project_template \
   --publishDir temp
 ```
 ```{sh echo=FALSE}
-bin/nextflow run https://github.com/viash-io/viash_project_template \
+NXF_VER=22.10.4 bin/nextflow \
+  run https://github.com/viash-io/viash_project_template \
   -main-script workflows/demo_pipeline/main.nf \
   -r 0.2.0 \
   -resume -latest \
