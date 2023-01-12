@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: viash-io/viash-actions/setup@v1
+    - uses: viash-io/viash-actions/setup@v1.0.0
 
     - name: Build target dir
       run: |
@@ -52,7 +52,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: viash-io/viash-actions/setup@v1
+    - uses: viash-io/viash-actions/setup@v1.0.0
 
     - name: Build container
       run: |

@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: viash-io/viash-actions/setup@v1
+    - uses: viash-io/viash-actions/setup@v1.0.0
 
     - id: set_matrix
       run: |
@@ -45,7 +45,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: viash-io/viash-actions/setup@v1
+    - uses: viash-io/viash-actions/setup@v1.0.0
 
     - name: Run test
       run: |
