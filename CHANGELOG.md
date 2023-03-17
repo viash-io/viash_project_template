@@ -1,8 +1,10 @@
 # viash_project_template 0.2.0
 
-* Update viash to 0.6.7. This also fixes an error when nextflow complains that `scriptPath` is not defined.
+* Update to Viash 0.7.1.
 
 * Replace 'underscore' (like `viash_build`) commands with equivalent 'ns' command (`viash ns build`).
+
+* Use slim versions of the previously used Docker images.
 
 # viash_project_template 0.1.0
 
