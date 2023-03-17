@@ -24,6 +24,5 @@ functionality:
     path: test.sh
 platforms:
   - type: docker
-    image: ubuntu:20.04
+    image: bash:4.0
   - type: nextflow
-    variant: vdsl3

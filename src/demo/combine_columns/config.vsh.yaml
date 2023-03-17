@@ -20,6 +20,5 @@ functionality:
       path: script.R
 platforms:
   - type: docker
-    image: rocker/r-ver:4.1
+    image: eddelbuettel/r2u:22.04
   - type: nextflow
-    variant: vdsl3
