@@ -6,6 +6,8 @@
 
 * Use slim versions of the previously used Docker images.
 
+* Update GitHub Actions.
+
 # viash_project_template 0.1.0
 
 First release of the project template repository.
