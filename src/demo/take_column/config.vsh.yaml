@@ -15,9 +15,6 @@ functionality:
       type: integer
       required: false
       default: 2
-    - type: string
-      name: --id
-      default: "take_column"
   resources:
   - type: python_script
     path: script.py

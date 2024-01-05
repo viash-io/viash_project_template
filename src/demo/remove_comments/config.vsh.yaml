@@ -13,15 +13,12 @@ functionality:
       required: true
       direction: output
       example: "file.tsv"
-    - type: string
-      name: --id
-      default: "remove_comments"
   resources:
-  - type: bash_script
-    path: script.sh
+    - type: bash_script
+      path: script.sh
   test_resources:
-  - type: bash_script
-    path: test.sh
+    - type: bash_script
+      path: test.sh
 platforms:
   - type: docker
     image: ubuntu:20.04

@@ -1,0 +1,52 @@
+functionality:
+  name: demo_pipeline
+  namespace: workflows
+  description: |
+    An example pipeline and project template.
+
+  arguments:
+    - name: "--input"
+      alternatives: [ "-i" ]
+      type: file
+      required: true
+      multiple: true
+      multiple_sep: ";"
+      description: fastq files
+      example: file1.tar.gz;file2.tar.gz 
+    - name: "--output"
+      alternatives: [ "-o" ]
+      type: file
+      direction: output
+      required: true
+      description: Output directory to write reports to.
+      example: qc/
+
+  resources:
+    - type: nextflow_script
+      path: main.nf
+      entrypoint: run_wf
+
+  dependencies: 
+    - name: demo/combine_columns
+      repository: local
+    - name: demo/remove_comments
+      repository: local
+    - name: demo/take_column
+      repository: local
+    - name: split/expand
+      repository: vsh_utils
+    - name: join/vsh_toList
+      repository: vsh_utils
+    - name: join/assemble
+      repository: vsh_utils
+
+  repositories:
+    - name: local
+      type: local
+    - name: vsh_utils
+      type: vsh
+      repo: data-intuitive/vsh_utils
+      tag: v0.1.0
+
+platforms:
+  - type: nextflow
