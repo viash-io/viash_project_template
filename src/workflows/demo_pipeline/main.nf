@@ -8,8 +8,10 @@ workflow run_wf {
 
       input_ch
 
-        // Turn the Channel event with list of files
+        // Turn the Channel event with a list of files
         // into multiple Channel events with one file.
+        // This involves either expanding a globbing parameter
+        // or multiple input files seperated by a `;`.
         | expand
 
         // Remove comments from each TSV input file
@@ -17,12 +19,15 @@ workflow run_wf {
             fromState: [ input: "output" ],
           )
 
-        // Extract single column from each TSV
+        // Extract a single column from each TSV
         | take_column.run(
             fromState: [ input: "output" ],
           )
 
-        // Custom toSortedList
+        // Helper module with extra functionality around
+        // nextflow's `toSortedList` operator to reformat 
+        // its output list into a channel item that can be used
+        // directly with downstream components.
         | vsh_toList.run(
             args: [ id: "run" ],
             fromState: [ input: "output" ],

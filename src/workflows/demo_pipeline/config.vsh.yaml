@@ -11,15 +11,15 @@ functionality:
       required: true
       multiple: true
       multiple_sep: ";"
-      description: fastq files
+      description: Input TSV files
       example: file1.tar.gz;file2.tar.gz 
     - name: "--output"
       alternatives: [ "-o" ]
       type: file
       direction: output
       required: true
-      description: Output directory to write reports to.
-      example: qc/
+      description: Output TSV file
+      example: output.tsv
 
   resources:
     - type: nextflow_script
@@ -34,10 +34,9 @@ functionality:
     - name: demo/take_column
       repository: local
     - name: split/expand
+      alias: expand_glob
       repository: vsh_utils
     - name: join/vsh_toList
-      repository: vsh_utils
-    - name: join/assemble
       repository: vsh_utils
 
   repositories:
