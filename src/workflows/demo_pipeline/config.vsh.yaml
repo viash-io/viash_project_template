@@ -34,7 +34,6 @@ functionality:
     - name: demo/take_column
       repository: local
     - name: split/expand
-      alias: expand_glob
       repository: vsh_utils
     - name: join/vsh_toList
       repository: vsh_utils
