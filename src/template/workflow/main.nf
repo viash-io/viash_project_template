@@ -12,7 +12,7 @@ workflow run_wf {
         // into multiple Channel events with one file.
         // This involves either expanding a globbing parameter
         // or multiple input files seperated by a `;`.
-        | expand
+        | vsh_flatten
 
         // Remove comments from each TSV input file
         | remove_comments.run(

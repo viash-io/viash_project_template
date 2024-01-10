@@ -33,7 +33,7 @@ functionality:
       repository: local
     - name: template/take_column
       repository: local
-    - name: split/expand
+    - name: split/vsh_flatten
       repository: vsh-pipeline-operators
     - name: join/vsh_toList
       repository: vsh-pipeline-operators
@@ -44,7 +44,7 @@ functionality:
     - name: vsh-pipeline-operators
       type: vsh
       repo: data-intuitive/vsh-pipeline-operators
-      tag: v0.1.0
+      tag: v0.2.0
 
 platforms:
   - type: nextflow
