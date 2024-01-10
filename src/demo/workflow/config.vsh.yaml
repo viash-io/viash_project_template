@@ -34,16 +34,16 @@ functionality:
     - name: demo/take_column
       repository: local
     - name: split/expand
-      repository: vsh_utils
+      repository: vsh-pipeline-operators
     - name: join/vsh_toList
-      repository: vsh_utils
+      repository: vsh-pipeline-operators
 
   repositories:
     - name: local
       type: local
-    - name: vsh_utils
+    - name: vsh-pipeline-operators
       type: vsh
-      repo: data-intuitive/vsh_utils
+      repo: data-intuitive/vsh-pipeline-operators
       tag: v0.1.0
 
 platforms:
