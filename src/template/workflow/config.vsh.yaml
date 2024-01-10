@@ -1,6 +1,6 @@
 functionality:
-  name: demo_pipeline
-  namespace: workflows
+  name: workflow
+  namespace: template
   description: |
     An example pipeline and project template.
 
@@ -27,11 +27,11 @@ functionality:
       entrypoint: run_wf
 
   dependencies: 
-    - name: demo/combine_columns
+    - name: template/combine_columns
       repository: local
-    - name: demo/remove_comments
+    - name: template/remove_comments
       repository: local
-    - name: demo/take_column
+    - name: template/take_column
       repository: local
     - name: split/expand
       repository: vsh-pipeline-operators
