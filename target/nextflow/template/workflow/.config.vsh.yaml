@@ -1,0 +1,189 @@
+functionality:
+  name: "workflow"
+  namespace: "template"
+  version: "0.2.0"
+  arguments:
+  - type: "file"
+    name: "--input"
+    alternatives:
+    - "-i"
+    description: "Input TSV file"
+    info: null
+    example:
+    - "file1.tar.gz"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ":"
+    dest: "par"
+  - type: "integer"
+    name: "--column"
+    description: "The column index to extract from the TSV input file"
+    info: null
+    default:
+    - 2
+    required: false
+    direction: "input"
+    multiple: false
+    multiple_sep: ":"
+    dest: "par"
+  - type: "file"
+    name: "--output"
+    alternatives:
+    - "-o"
+    description: "Output TSV file"
+    info: null
+    example:
+    - "output.tsv"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "output"
+    multiple: false
+    multiple_sep: ":"
+    dest: "par"
+  resources:
+  - type: "nextflow_script"
+    path: "main.nf"
+    is_executable: true
+    entrypoint: "run_wf"
+  description: "An example pipeline and project template.\n\nMultiple TSV files can\
+    \ be input, each with a 'column' identifier that\nshould be extracted. All extracted\
+    \ columns are then collated again.\n"
+  info: null
+  status: "enabled"
+  dependencies:
+  - name: "template/combine_columns"
+    repository:
+      type: "local"
+      localPath: ""
+    foundConfigPath: "/Users/toni/code/projects/viash/viash_project_template/src/template/combine_columns/config.vsh.yaml"
+    configInfo:
+      functionalityName: "combine_columns"
+      git_tag: ""
+      git_remote: "https://github.com/viash-io/viash_project_template"
+      viash_version: "0.8.3"
+      config: "/Users/toni/code/projects/viash/viash_project_template/src/template/combine_columns/config.vsh.yaml"
+      functionalityNamespace: "template"
+      output: ""
+      platform: ""
+      git_commit: "0ad975a0c969fb47c652a312557f3a4be2448b37"
+      executable: "/nextflow/template/combine_columns/main.nf"
+    writtenPath: "/Users/toni/code/projects/viash/viash_project_template/target/nextflow/template/combine_columns"
+  - name: "template/remove_comments"
+    repository:
+      type: "local"
+      localPath: ""
+    foundConfigPath: "/Users/toni/code/projects/viash/viash_project_template/src/template/remove_comments/config.vsh.yaml"
+    configInfo:
+      functionalityName: "remove_comments"
+      git_tag: ""
+      git_remote: "https://github.com/viash-io/viash_project_template"
+      viash_version: "0.8.3"
+      config: "/Users/toni/code/projects/viash/viash_project_template/src/template/remove_comments/config.vsh.yaml"
+      functionalityNamespace: "template"
+      output: ""
+      platform: ""
+      git_commit: "0ad975a0c969fb47c652a312557f3a4be2448b37"
+      executable: "/nextflow/template/remove_comments/main.nf"
+    writtenPath: "/Users/toni/code/projects/viash/viash_project_template/target/nextflow/template/remove_comments"
+  - name: "template/take_column"
+    repository:
+      type: "local"
+      localPath: ""
+    foundConfigPath: "/Users/toni/code/projects/viash/viash_project_template/src/template/take_column/config.vsh.yaml"
+    configInfo:
+      functionalityName: "take_column"
+      git_tag: ""
+      git_remote: "https://github.com/viash-io/viash_project_template"
+      viash_version: "0.8.3"
+      config: "/Users/toni/code/projects/viash/viash_project_template/src/template/take_column/config.vsh.yaml"
+      functionalityNamespace: "template"
+      output: ""
+      platform: ""
+      git_commit: "0ad975a0c969fb47c652a312557f3a4be2448b37"
+      executable: "/nextflow/template/take_column/main.nf"
+    writtenPath: "/Users/toni/code/projects/viash/viash_project_template/target/nextflow/template/take_column"
+  - name: "join/vsh_toList"
+    repository:
+      type: "vsh"
+      name: ""
+      repo: "data-intuitive/vsh-pipeline-operators"
+      tag: "v0.2.0"
+      localPath: "/tmp/viash_hub_repo15985120125476042269"
+    foundConfigPath: "/tmp/viash_hub_repo15985120125476042269/target/nextflow/join/vsh_toList/.config.vsh.yaml"
+    configInfo:
+      functionalityName: "vsh_toList"
+      git_remote: "git@viash-hub.com:data-intuitive/vsh-pipeline-operators.git"
+      viash_version: "0.8.3"
+      config: "/Users/toni/code/projects/viash-hub/vsh-pipeline-operators/src/join/vsh_toList/config.vsh.yaml"
+      functionalityNamespace: "join"
+      output: "/Users/toni/code/projects/viash-hub/vsh-pipeline-operators/target/nextflow/join/vsh_toList"
+      platform: "nextflow"
+      git_commit: "05a5bfa4eaa2c04ba473671e4d30c6c18aceec6e"
+      executable: "/Users/toni/code/projects/viash-hub/vsh-pipeline-operators/target/nextflow/join/vsh_toList/main.nf"
+    writtenPath: "/Users/toni/code/projects/viash/viash_project_template/target/dependencies/vsh/data-intuitive/vsh-pipeline-operators/v0.2.0/../../../../tmp/viash_hub_repo15985120125476042269/target/nextflow/join/vsh_toList"
+  repositories:
+  - type: "local"
+    name: "local"
+    localPath: ""
+  - type: "vsh"
+    name: "vsh-pipeline-operators"
+    repo: "data-intuitive/vsh-pipeline-operators"
+    tag: "v0.2.0"
+    localPath: ""
+  set_wd_to_resources_dir: false
+platforms:
+- type: "nextflow"
+  id: "nextflow"
+  directives:
+    tag: "$id"
+  auto:
+    simplifyInput: true
+    simplifyOutput: false
+    transcript: false
+    publish: false
+  config:
+    labels:
+      mem1gb: "memory = 1.GB"
+      mem2gb: "memory = 2.GB"
+      mem4gb: "memory = 4.GB"
+      mem8gb: "memory = 8.GB"
+      mem16gb: "memory = 16.GB"
+      mem32gb: "memory = 32.GB"
+      mem64gb: "memory = 64.GB"
+      mem128gb: "memory = 128.GB"
+      mem256gb: "memory = 256.GB"
+      mem512gb: "memory = 512.GB"
+      mem1tb: "memory = 1.TB"
+      mem2tb: "memory = 2.TB"
+      mem4tb: "memory = 4.TB"
+      mem8tb: "memory = 8.TB"
+      mem16tb: "memory = 16.TB"
+      mem32tb: "memory = 32.TB"
+      mem64tb: "memory = 64.TB"
+      mem128tb: "memory = 128.TB"
+      mem256tb: "memory = 256.TB"
+      mem512tb: "memory = 512.TB"
+      cpu1: "cpus = 1"
+      cpu2: "cpus = 2"
+      cpu5: "cpus = 5"
+      cpu10: "cpus = 10"
+      cpu20: "cpus = 20"
+      cpu50: "cpus = 50"
+      cpu100: "cpus = 100"
+      cpu200: "cpus = 200"
+      cpu500: "cpus = 500"
+      cpu1000: "cpus = 1000"
+  debug: false
+  container: "docker"
+info:
+  config: "/Users/toni/code/projects/viash/viash_project_template/src/template/workflow/config.vsh.yaml"
+  platform: "nextflow"
+  output: "/Users/toni/code/projects/viash/viash_project_template/target/nextflow/template/workflow"
+  executable: "/Users/toni/code/projects/viash/viash_project_template/target/nextflow/template/workflow/main.nf"
+  viash_version: "0.8.3"
+  git_commit: "0ad975a0c969fb47c652a312557f3a4be2448b37"
+  git_remote: "https://github.com/viash-io/viash_project_template"
