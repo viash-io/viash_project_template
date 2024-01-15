@@ -4,15 +4,21 @@ functionality:
   description: |
     An example pipeline and project template.
 
+    Multiple TSV files can be input, each with a 'column' identifier that
+    should be extracted. All extracted columns are then collated again.
+
   arguments:
     - name: "--input"
       alternatives: [ "-i" ]
       type: file
       required: true
-      multiple: true
-      multiple_sep: ";"
-      description: Input TSV files
-      example: file1.tar.gz;file2.tar.gz 
+      description: Input TSV file
+      example: file1.tar.gz 
+    - name: "--column"
+      type: integer
+      required: false
+      default: 2
+      description: The column index to extract from the TSV input file
     - name: "--output"
       alternatives: [ "-o" ]
       type: file
@@ -33,8 +39,6 @@ functionality:
       repository: local
     - name: template/take_column
       repository: local
-    - name: split/vsh_flatten
-      repository: vsh-pipeline-operators
     - name: join/vsh_toList
       repository: vsh-pipeline-operators
 

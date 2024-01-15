@@ -8,20 +8,21 @@ workflow run_wf {
 
       input_ch
 
-        // Turn the Channel event with a list of files
-        // into multiple Channel events with one file.
-        // This involves either expanding a globbing parameter
-        // or multiple input files seperated by a `;`.
-        | vsh_flatten
-
         // Remove comments from each TSV input file
         | remove_comments.run(
-            fromState: [ input: "output" ],
+            fromState: [ input: "input" ],
+            toState: { id, result, state -> state + result }
           )
 
         // Extract a single column from each TSV
+        // The column to extract is specified in the sample sheet
         | take_column.run(
-            fromState: [ input: "output" ],
+            fromState:
+              [
+                input: "output",
+                column: "column"
+              ],
+            toState: { id, result, state -> result }
           )
 
         // Helper module with extra functionality around
@@ -29,18 +30,23 @@ workflow run_wf {
         // its output list into a channel item that can be used
         // directly with downstream components.
         | vsh_toList.run(
-            args: [ id: "run" ],
+            args: [ id: "combined" ],
             fromState: [ input: "output" ],
+            toState: [ output: "output" ]
           )
 
         // Concatenate TSVs into one
+        // and prep the output state.
         | combine_columns.run(
             auto: [ publish: true ],
             fromState: [ input: "output" ],
+            toState: { id, result, state ->
+              [
+                output: result.output,
+                _meta: [ join_id: "1" ]
+              ]
+            }
           )
-
-        // View channel contents
-        | niceView()
 
   emit:
     output_ch
