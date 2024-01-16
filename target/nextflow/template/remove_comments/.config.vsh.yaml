@@ -1,7 +1,7 @@
 functionality:
   name: "remove_comments"
   namespace: "template"
-  version: "0.2.0"
+  version: "0.2.1"
   arguments:
   - type: "file"
     name: "--input"
@@ -103,6 +103,7 @@ info:
   platform: "nextflow"
   output: "/Users/toni/code/projects/viash/viash_project_template/target/nextflow/template/remove_comments"
   executable: "/Users/toni/code/projects/viash/viash_project_template/target/nextflow/template/remove_comments/remove_comments"
-  viash_version: "0.8.3"
-  git_commit: "0ad975a0c969fb47c652a312557f3a4be2448b37"
+  viash_version: "0.8.4"
+  git_commit: "3c5a6ec5a23ea032316a60d141c9083dd78936c1"
   git_remote: "https://github.com/viash-io/viash_project_template"
+  git_tag: "v0.2.0"
