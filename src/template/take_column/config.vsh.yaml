@@ -23,5 +23,9 @@ platforms:
     image: python:3.10-slim
     setup:
       - type: python
-        packages: pandas
+        packages: 
+          - pandas
+      - type: apt
+        packages: 
+          - procps
   - type: nextflow
