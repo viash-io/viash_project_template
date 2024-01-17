@@ -1,0 +1,54 @@
+functionality:
+  name: workflow
+  namespace: template
+  description: |
+    An example pipeline and project template.
+
+    Multiple TSV files can be input, each with a 'column' identifier that
+    should be extracted. All extracted columns are then collated again.
+
+  arguments:
+    - name: "--input"
+      alternatives: [ "-i" ]
+      type: file
+      required: true
+      description: Input TSV file
+      example: file1.tar.gz 
+    - name: "--column"
+      type: integer
+      required: false
+      default: 2
+      description: The column index to extract from the TSV input file
+    - name: "--output"
+      alternatives: [ "-o" ]
+      type: file
+      direction: output
+      required: true
+      description: Output TSV file
+      example: output.tsv
+
+  resources:
+    - type: nextflow_script
+      path: main.nf
+      entrypoint: run_wf
+
+  dependencies: 
+    - name: template/combine_columns
+      repository: local
+    - name: template/remove_comments
+      repository: local
+    - name: template/take_column
+      repository: local
+    - name: join/vsh_toList
+      repository: vsh-pipeline-operators
+
+  repositories:
+    - name: local
+      type: local
+    - name: vsh-pipeline-operators
+      type: vsh
+      repo: data-intuitive/vsh-pipeline-operators
+      tag: v0.2.0
+
+platforms:
+  - type: nextflow

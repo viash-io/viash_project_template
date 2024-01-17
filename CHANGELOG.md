@@ -1,3 +1,11 @@
+# viash_project_template 0.3.0
+
+* Update to Viash 0.8.2
+
+    * `demo_pipeline` is now built from `src/workflows/demo_pipeline`
+    * State management overhaul
+    * Use of helper functions (dependencies) from [`vsh_utils`](https://viash-hub.com/data-intuitive/vsh_utils)
+
 # viash_project_template 0.2.0
 
 * Update to Viash 0.7.1.
