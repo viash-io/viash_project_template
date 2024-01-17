@@ -1,6 +1,6 @@
 functionality:
   name: take_column
-  namespace: template
+  namespace: demo
   arguments:
     - name: "--input"
       alternatives: [ "-i" ]
@@ -15,6 +15,9 @@ functionality:
       type: integer
       required: false
       default: 2
+    - type: string
+      name: --id
+      default: "take_column"
   resources:
   - type: python_script
     path: script.py
@@ -23,9 +26,5 @@ platforms:
     image: python:3.10-slim
     setup:
       - type: python
-        packages: 
-          - pandas
-      - type: apt
-        packages: 
-          - procps
+        packages: pandas
   - type: nextflow
