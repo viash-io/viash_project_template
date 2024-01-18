@@ -19,7 +19,7 @@
         "manual inputs": {
             "title": "manual input",
             "type": "object",
-            "description": "Optional: input of global parameters or to override parameters present in sample_sheet.",
+            "description": "Optional: input of global parameters. Note that any parameters present in the input file above will override global parameters specified here.",
             "properties": {
                 "input": {
                     "type": "string",
@@ -29,7 +29,7 @@
                 "column": {
                     "type": "integer",
                     "description": "The column index to extract from the TSV input file.",
-                    "default": 2
+                    "default": ""
                 },
                 "output": {
                     "type": "string",
