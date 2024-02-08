@@ -18,4 +18,8 @@ functionality:
 platforms:
   - type: docker
     image: eddelbuettel/r2u:22.04
+    setup:
+      - type: r
+        packages:
+          - bit64
   - type: nextflow

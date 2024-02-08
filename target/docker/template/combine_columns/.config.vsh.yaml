@@ -1,7 +1,7 @@
 functionality:
   name: "combine_columns"
   namespace: "template"
-  version: "0.2.2"
+  version: "0.2.3"
   arguments:
   - type: "file"
     name: "--input"
@@ -45,6 +45,11 @@ platforms:
   chown: true
   setup_strategy: "ifneedbepullelsecachedbuild"
   target_image_source: "https://github.com/viash-io/viash_project_template"
+  setup:
+  - type: "r"
+    packages:
+    - "bit64"
+    bioc_force_install: false
   entrypoint: []
   cmd: null
 - type: "nextflow"
@@ -96,6 +101,6 @@ info:
   output: "/Users/toni/code/projects/viash/viash_project_template/target/docker/template/combine_columns"
   executable: "/Users/toni/code/projects/viash/viash_project_template/target/docker/template/combine_columns/combine_columns"
   viash_version: "0.8.4"
-  git_commit: "11b6278597bf22afbfb56a8e83065a55553c9dd0"
+  git_commit: "82b49c3c35b4fd813b4c585e921a5b0885b25cc3"
   git_remote: "https://github.com/viash-io/viash_project_template"
-  git_tag: "v0.2.1"
+  git_tag: "v0.2.2"

@@ -30,8 +30,12 @@ workflow run_wf {
         // its output list into a channel item that can be used
         // directly with downstream components.
         | vsh_toList.run(
-            args: [ id: "combined" ],
-            fromState: [ input: "output" ],
+            fromState: { id, state ->
+              [
+                id: id,
+                input: state.output
+              ]
+            },
             toState: [ output: "output" ]
           )
 
@@ -40,12 +44,7 @@ workflow run_wf {
         | combine_columns.run(
             auto: [ publish: true ],
             fromState: [ input: "output" ],
-            toState: { id, result, state ->
-              [
-                output: result.output,
-                _meta: [ join_id: "1" ]
-              ]
-            }
+            toState: { id, result, state -> result }
           )
 
   emit:
