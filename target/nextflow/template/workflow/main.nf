@@ -2950,9 +2950,9 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/template/workflow",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "8a5b1de1074b44fb1fea816761320c72418e8cb6",
+    "git_commit" : "a2b5faa1300ffbdc8396b2a154c5b1c98b1be02e",
     "git_remote" : "https://github.com/viash-io/viash_project_template",
-    "git_tag" : "v0.2.2-11-g8a5b1de"
+    "git_tag" : "v0.2.2-12-ga2b5faa"
   },
   "package_config" : {
     "name" : "project_template",
