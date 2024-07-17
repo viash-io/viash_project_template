@@ -458,7 +458,7 @@ function ViashDockerfile {
 FROM ubuntu:20.04
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component template remove_comments"
-LABEL org.opencontainers.image.created="2024-07-17T12:36:09Z"
+LABEL org.opencontainers.image.created="2024-07-17T12:38:22Z"
 LABEL org.opencontainers.image.source="https://github.com/viash-io/viash_project_template"
 LABEL org.opencontainers.image.revision="9c86357120732fa58e1acd5e224f93d4545fef11"
 LABEL org.opencontainers.image.version="build_main"
