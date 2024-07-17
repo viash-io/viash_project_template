@@ -54,13 +54,14 @@ graph LR
   nextflow[Nextflow workflow]
 
   
-  script & config --- viash_build --> docker_image & executable
+  component --- viash_build --> docker_image & executable
   docker_image -.-> executable & nextflow
   viash_build --> nextflow
 
   nextflow --dependency--> nextflow
 
   subgraph compute [Compute environment]
+    direction LR
     local[Local execution]
     awsbatch[AWS Batch]
     googlebatch[Google Cloud Batch]
@@ -149,14 +150,14 @@ Output
     [33mNextflow 24.04.3 is available - Please consider updating your version to it(B[m
     N E X T F L O W  ~  version 23.10.0
     Pulling viash-io/viash_project_template ...
-     Already-up-to-date
-    Launching `https://github.com/viash-io/viash_project_template` [kickass_wescoff] DSL2 - revision: 5971837633 [build/main]
-    [5c/8aaf68] Submitted process > workflow:run_wf:remove_comments:processWf:remove_comments_process (file2)
-    [73/4b02d0] Submitted process > workflow:run_wf:remove_comments:processWf:remove_comments_process (file1)
-    [1d/68933b] Submitted process > workflow:run_wf:take_column:processWf:take_column_process (file2)
-    [5f/3cf8f1] Submitted process > workflow:run_wf:take_column:processWf:take_column_process (file1)
-    [88/61f733] Submitted process > workflow:run_wf:combine_columns:processWf:combine_columns_process (combined)
-    [97/67bc9f] Submitted process > workflow:publishStatesSimpleWf:publishStatesProc (combined)
+     Fast-forward
+    Launching `https://github.com/viash-io/viash_project_template` [high_booth] DSL2 - revision: 850d7a9a0b [build/main]
+    [d6/a1c458] Submitted process > workflow:run_wf:remove_comments:processWf:remove_comments_process (file2)
+    [8d/2c2769] Submitted process > workflow:run_wf:remove_comments:processWf:remove_comments_process (file1)
+    [33/99ab7b] Submitted process > workflow:run_wf:take_column:processWf:take_column_process (file2)
+    [d3/0558f7] Submitted process > workflow:run_wf:take_column:processWf:take_column_process (file1)
+    [bf/17413a] Submitted process > workflow:run_wf:combine_columns:processWf:combine_columns_process (combined)
+    [41/e8de88] Submitted process > workflow:publishStatesSimpleWf:publishStatesProc (combined)
 
 </details>
 
@@ -204,6 +205,11 @@ Your new repository should contain the following files:
 ``` bash
 tree my_first_pipeline
 ```
+
+<details>
+<summary>
+Output
+</summary>
 
     .
     ├── CHANGELOG.md
@@ -326,6 +332,12 @@ tree my_first_pipeline
         │       └── _viash_par
         │           └── input_1
         │               └── file1.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/a2/364f5e24ac876c1c623e5108715c25/file1.remove_comments.output.tsv
+        ├── 33
+        │   └── 99ab7b871657561e53852ceffb2c3b
+        │       ├── file2.take_column.output.tsv
+        │       └── _viash_par
+        │           └── input_1
+        │               └── file2.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/d6/a1c45853eb77de60f7e418335572f7/file2.remove_comments.output.tsv
         ├── 34
         │   └── 01b46f7b0e2e645ab666e5018eabae
         │       ├── file2.take_column.output
@@ -344,6 +356,18 @@ tree my_first_pipeline
         │       └── _viash_par
         │           └── input_1
         │               └── file1.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/51/c6c6f3fdde45320e405d179f99d312/file1.remove_comments.output.tsv
+        ├── 3b
+        │   └── 03eccd1f1b72cc9573c75517768598
+        │       ├── combined.workflow.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/df/b8f21005023ec59164adf1b73c16f5/combined.combine_columns.output.tsv
+        │       ├── combined.workflow.state.yaml
+        │       └── _inputfile1
+        │           └── combined.combine_columns.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/df/b8f21005023ec59164adf1b73c16f5/combined.combine_columns.output.tsv
+        ├── 41
+        │   └── e8de8893710a2ceb0cd054eb575e85
+        │       ├── combined.workflow.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/bf/17413a5e9d5d7ed0263107ebcdd35c/combined.combine_columns.output.tsv
+        │       ├── combined.workflow.state.yaml
+        │       └── _inputfile1
+        │           └── combined.combine_columns.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/bf/17413a5e9d5d7ed0263107ebcdd35c/combined.combine_columns.output.tsv
         ├── 42
         │   └── fc43ba6329aefa58093c2398bdad50
         │       ├── combined.combine_columns.output
@@ -441,6 +465,11 @@ tree my_first_pipeline
         │           └── input_1
         │               └── file2.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/65/74f3824fa5c47fe39f4a7afa513ba3/file2.remove_comments.output.tsv
         ├── 6e
+        │   ├── 23e430564b01e0aded3ca6983ac873
+        │   │   ├── file2.remove_comments.output.tsv
+        │   │   └── _viash_par
+        │   │       └── input_1
+        │   │           └── file2.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/resources_test/file2.tsv
         │   └── 6e14906d52ce474625898954ecdc23
         │       ├── file2.take_column.output
         │       └── _viash_par
@@ -459,6 +488,11 @@ tree my_first_pipeline
         │       └── _inputfile1
         │           └── combined.combine_columns.output -> /home/rcannood/workspace/viash-io/viash_project_template/work/4f/99d95392847652f65a764f0001159d/combined.combine_columns.output
         ├── 7d
+        │   ├── 7c9e5fa10e97e37a112d9e7934a5cf
+        │   │   ├── file2.take_column.output.tsv
+        │   │   └── _viash_par
+        │   │       └── input_1
+        │   │           └── file2.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/6e/23e430564b01e0aded3ca6983ac873/file2.remove_comments.output.tsv
         │   └── aa34e2647eacc36dd144b6a643283f
         │       ├── file2.remove_comments.output.tsv
         │       └── _viash_par
@@ -496,6 +530,12 @@ tree my_first_pipeline
         │       └── _viash_par
         │           └── input_1
         │               └── file2.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/bf/ab6cbd0018d747facdfd11a71a2c25/file2.remove_comments.output.tsv
+        ├── 8d
+        │   └── 2c2769f8c6eeaf83b65fbd3ae8b745
+        │       ├── file1.remove_comments.output.tsv
+        │       └── _viash_par
+        │           └── input_1
+        │               └── file1.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/resources_test/file1.tsv
         ├── 8f
         │   └── 850c4d4b5974c7f0cae9c5168b2ae8
         │       ├── file2.remove_comments.output.tsv
@@ -503,11 +543,22 @@ tree my_first_pipeline
         │           └── input_1
         │               └── file2.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/resources_test/file2.tsv
         ├── 91
-        │   └── 4476a4387a1901b58422821cdb8fa7
-        │       ├── file1.take_column.output
+        │   ├── 4476a4387a1901b58422821cdb8fa7
+        │   │   ├── file1.take_column.output
+        │   │   └── _viash_par
+        │   │       └── input_1
+        │   │           └── file1.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/c2/de1bc7b847fe9c8633b88062cb9340/file1.remove_comments.output.tsv
+        │   └── 8c0ac0adc5db34536a78bdd0faf6fe
+        │       ├── file1.take_column.output.tsv
         │       └── _viash_par
         │           └── input_1
-        │               └── file1.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/c2/de1bc7b847fe9c8633b88062cb9340/file1.remove_comments.output.tsv
+        │               └── file1.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/93/914f3c979e5d377f715114f888b288/file1.remove_comments.output.tsv
+        ├── 93
+        │   └── 914f3c979e5d377f715114f888b288
+        │       ├── file1.remove_comments.output.tsv
+        │       └── _viash_par
+        │           └── input_1
+        │               └── file1.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/resources_test/file1.tsv
         ├── 97
         │   ├── 67bc9ff22c2f1fadc730d142de61bf
         │   │   ├── combined.workflow.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/88/61f733186d443467b3efe1cd3b883a/combined.combine_columns.output.tsv
@@ -615,6 +666,13 @@ tree my_first_pipeline
         │           └── input_2
         │               └── file2.take_column.output -> /home/rcannood/workspace/viash-io/viash_project_template/work/48/8b8abb853b5655faca3e83b6cb87f4/file2.take_column.output
         ├── bf
+        │   ├── 17413a5e9d5d7ed0263107ebcdd35c
+        │   │   ├── combined.combine_columns.output.tsv
+        │   │   └── _viash_par
+        │   │       ├── input_1
+        │   │       │   └── file1.take_column.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/d3/0558f7d20cf213bddb41ff95087b21/file1.take_column.output.tsv
+        │   │       └── input_2
+        │   │           └── file2.take_column.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/33/99ab7b871657561e53852ceffb2c3b/file2.take_column.output.tsv
         │   └── ab6cbd0018d747facdfd11a71a2c25
         │       ├── file2.remove_comments.output.tsv
         │       └── _viash_par
@@ -629,12 +687,24 @@ tree my_first_pipeline
         ├── c7
         │   └── 7afec45f9f4b9db690a4cba6a00670
         │       └── run.remove_comments.output.tsv
+        ├── d3
+        │   └── 0558f7d20cf213bddb41ff95087b21
+        │       ├── file1.take_column.output.tsv
+        │       └── _viash_par
+        │           └── input_1
+        │               └── file1.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/8d/2c2769f8c6eeaf83b65fbd3ae8b745/file1.remove_comments.output.tsv
         ├── d4
         │   └── 84823059b693efb2cc0eee9cbb7e3f
         │       ├── file1.take_column.output
         │       └── _viash_par
         │           └── input_1
         │               └── file1.remove_comments.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/da/fa0bfc9ac6fdd94a3d3c3d1a501e2d/file1.remove_comments.output.tsv
+        ├── d6
+        │   └── a1c45853eb77de60f7e418335572f7
+        │       ├── file2.remove_comments.output.tsv
+        │       └── _viash_par
+        │           └── input_1
+        │               └── file2.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/resources_test/file2.tsv
         ├── d7
         │   └── 49029eb5446a27efc5479b06db24e2
         │       ├── combined.workflow.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/a7/1be5d7138644b119c619b6ac5c29ff/combined.combine_columns.output
@@ -654,6 +724,14 @@ tree my_first_pipeline
         │       └── _viash_par
         │           └── input_1
         │               └── file1.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/resources_test/file1.tsv
+        ├── df
+        │   └── b8f21005023ec59164adf1b73c16f5
+        │       ├── combined.combine_columns.output.tsv
+        │       └── _viash_par
+        │           ├── input_1
+        │           │   └── file1.take_column.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/91/8c0ac0adc5db34536a78bdd0faf6fe/file1.take_column.output.tsv
+        │           └── input_2
+        │               └── file2.take_column.output.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/work/7d/7c9e5fa10e97e37a112d9e7934a5cf/file2.take_column.output.tsv
         ├── e6
         │   └── 35d4d3da9b59d4067d39160a4bfc29
         │       ├── file1.remove_comments.output.tsv
@@ -687,7 +765,9 @@ tree my_first_pipeline
                     └── input_1
                         └── file1.tsv -> /home/rcannood/workspace/viash-io/viash_project_template/resources_test/file1.tsv
 
-    293 directories, 188 files
+    337 directories, 216 files
+
+</details>
 
 ### Step 2: Build the Viash components
 
@@ -703,13 +783,13 @@ viash ns build --setup cachedbuild --parallel
 Output
 </summary>
 
-    Exporting workflow (template) =nextflow=> target/nextflow/template/workflow
-    Exporting take_column (template) =nextflow=> target/nextflow/template/take_column
-    Exporting combine_columns (template) =executable=> target/executable/template/combine_columns
     Exporting take_column (template) =executable=> target/executable/template/take_column
-    Exporting remove_comments (template) =nextflow=> target/nextflow/template/remove_comments
+    Exporting take_column (template) =nextflow=> target/nextflow/template/take_column
     Exporting combine_columns (template) =nextflow=> target/nextflow/template/combine_columns
     Exporting remove_comments (template) =executable=> target/executable/template/remove_comments
+    Exporting remove_comments (template) =nextflow=> target/nextflow/template/remove_comments
+    Exporting workflow (template) =nextflow=> target/nextflow/template/workflow
+    Exporting combine_columns (template) =executable=> target/executable/template/combine_columns
     [notice] Building container 'ghcr.io/viash-io/project_template/template/take_column:dev' with Dockerfile
     [notice] Building container 'ghcr.io/viash-io/project_template/template/combine_columns:dev' with Dockerfile
     [notice] Building container 'ghcr.io/viash-io/project_template/template/remove_comments:dev' with Dockerfile
@@ -779,13 +859,13 @@ Output
 
     [33mNextflow 24.04.3 is available - Please consider updating your version to it(B[m
     N E X T F L O W  ~  version 23.10.0
-    Launching `target/nextflow/template/workflow/main.nf` [modest_noyce] DSL2 - revision: 43ac230bc0
-    [93/914f3c] Submitted process > workflow:run_wf:remove_comments:processWf:remove_comments_process (file1)
-    [6e/23e430] Submitted process > workflow:run_wf:remove_comments:processWf:remove_comments_process (file2)
-    [7d/7c9e5f] Submitted process > workflow:run_wf:take_column:processWf:take_column_process (file2)
-    [91/8c0ac0] Submitted process > workflow:run_wf:take_column:processWf:take_column_process (file1)
-    [df/b8f210] Submitted process > workflow:run_wf:combine_columns:processWf:combine_columns_process (combined)
-    [3b/03eccd] Submitted process > workflow:publishStatesSimpleWf:publishStatesProc (combined)
+    Launching `target/nextflow/template/workflow/main.nf` [high_hilbert] DSL2 - revision: f68ea52db6
+    [7e/d31ed4] Submitted process > workflow:run_wf:remove_comments:processWf:remove_comments_process (file1)
+    [0a/90dd2e] Submitted process > workflow:run_wf:remove_comments:processWf:remove_comments_process (file2)
+    [72/fb17ac] Submitted process > workflow:run_wf:take_column:processWf:take_column_process (file2)
+    [44/0f47bd] Submitted process > workflow:run_wf:take_column:processWf:take_column_process (file1)
+    [88/8ff83f] Submitted process > workflow:run_wf:combine_columns:processWf:combine_columns_process (combined)
+    [15/3aaf04] Submitted process > workflow:publishStatesSimpleWf:publishStatesProc (combined)
 
 </details>
 
@@ -802,10 +882,10 @@ cat output/combined.workflow.output.tsv
 Output
 </summary>
 
-    "1" 0.11    0.111
-    "2" 0.23    0.222
-    "3" 0.35    0.333
-    "4" 0.47    0.444
+    "1" 0.111   0.11
+    "2" 0.222   0.23
+    "3" 0.333   0.35
+    "4" 0.444   0.47
 
 </details>
 
