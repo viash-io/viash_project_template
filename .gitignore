@@ -1,5 +1,6 @@
 # temporary files
 temp
+output
 
 # Nextflow
 work/
