@@ -1,0 +1,90 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  # phase 1
+  list:
+    name: List components to test
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.ns_list_filter_nextflow.outputs.output_matrix }}
+      cache_key: ${{ steps.cache.outputs.cache_key }}
+      dest_paths: ${{ steps.cache.outputs.dest_paths }}
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: 'recursive'
+
+    - uses: viash-io/viash-actions/setup@v6
+
+    - uses: viash-io/viash-actions/project/sync-and-cache@v6
+      id: cache
+
+    - id: ns_list
+      uses: viash-io/viash-actions/ns-list@v6
+      with:
+        format: json
+        runner: executable
+
+    - id: ns_list_filter_changed
+      uses: viash-io/viash-actions/project/detect-changed-components@v6
+      with:
+        input_file: "${{ steps.ns_list.outputs.output_file }}"
+
+    - name: Filter out Nextflow scripts (testing currently not supported)
+      id: ns_list_filter_nextflow
+      run: |
+        OUTPUT_MATRIX=$(echo '${{ steps.ns_list_filter_changed.outputs.output_matrix }}' | jq -c 'map(select(.main_script_type != "nextflow_script"))')
+        echo "output_matrix=$OUTPUT_MATRIX" >> $GITHUB_OUTPUT
+
+  # phase 2
+  test:
+    name: Test component
+    needs: list
+    if: ${{ needs.list.outputs.matrix != '[]' && needs.list.outputs.matrix != '' }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        component: ${{ fromJson(needs.list.outputs.matrix) }}
+
+    steps:
+    # Remove unnecessary files to free up space. Otherwise, we get 'no space left on device.'
+    - name: Clear space
+      uses: data-intuitive/reclaim-the-bytes@v2
+    
+    - name: Check out repository
+      uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+        fetch-depth: 0
+        
+    - name: Install Viash
+      uses: viash-io/viash-actions/setup@v6
+
+    # use cache
+    - name: Cache resources data
+      if: ${{ needs.list.outputs.cache_key != '' }}
+      uses: actions/cache/restore@v4
+      timeout-minutes: 10
+      with:
+        path: ${{ needs.list.outputs.dest_paths }}
+        key: ${{ needs.list.outputs.cache_key }}
+
+    - name: Run test
+      timeout-minutes: 30
+      env:
+        VIASH_TEMP: "${{ runner.temp }}/viash_test_temp"
+      run: |
+        viash test \
+          "${{ matrix.component.config }}" \
+          --cpus 2 \
+          --memory "16gb"
