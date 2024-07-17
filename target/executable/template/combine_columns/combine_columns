@@ -176,9 +176,11 @@ function ViashHelp {
   echo "Arguments:"
   echo "    -i, --input"
   echo "        type: file, required parameter, multiple values allowed, file must exist"
+  echo "        example: resources_test/file1.tsv;resources_test/file2.tsv"
   echo ""
   echo "    -o, --output"
   echo "        type: file, required parameter, output, file must exist"
+  echo "        example: output.tsv"
 }
 
 # initialise variables
@@ -459,9 +461,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("bit64"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component template combine_columns"
-LABEL org.opencontainers.image.created="2024-07-17T11:04:54Z"
+LABEL org.opencontainers.image.created="2024-07-17T12:00:38Z"
 LABEL org.opencontainers.image.source="https://github.com/viash-io/viash_project_template"
-LABEL org.opencontainers.image.revision="67b3e77ff07fefb186c1ef66434b72ae8deac34a"
+LABEL org.opencontainers.image.revision="14f1c9c3d86b1822678b22ea862ff7a21cb243c5"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

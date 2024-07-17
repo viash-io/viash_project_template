@@ -5,27 +5,39 @@ workflow run_wf {
   main:
     output_ch = input_ch
 
-      | view{"input: $it"}
-
-      // Remove comments from each TSV input file
+      /*
+        Remove comments from each TSV input file
+        
+        Example of an element in the channel at this stage:
+        
+          [ "myid", [ input: "path/to/input.tsv", column: 3 ] ]
+      */
       | remove_comments.run(
         fromState: [ input: "input" ],
-        toState: [ output: "output" ]
+        toState: [ data_comments_removed: "output" ]
       )
 
-      | view{"after remove_comments: $it"}
-
-      // Extract a single column from each TSV
-      // The column to extract is specified in the sample sheet
+      /*
+        Extract a single column from each TSV
+        
+        Example of an element in the channel at this stage:
+        
+          [
+            "myid",
+            [
+              input: "path/to/input.tsv",
+              column: 3,
+              data_comments_removed: "work/path/to/output.tsv"
+            ]
+          ]
+      */
       | take_column.run(
         fromState: [
-          input: "output",
+          input: "data_comments_removed",
           column: "column"
         ],
-        toState: [ output: "output" ]
+        toState: [ data_one_column: "output" ]
       )
-
-      | view{"after take_column: $it"}
 
       // Combine the given tuples into one
       | toSortedList
@@ -33,23 +45,30 @@ workflow run_wf {
       | map { state_list ->
         def new_id = "combined"
         def new_state = [
-          input: state_list.collect{ id, state -> state.output },
+          input: state_list.collect{ id, state -> state.data_one_column },
+          // store the original id in the _meta field
           _meta: [ join_id: state_list[0][0] ]
         ]
         [ new_id, new_state ]
       }
 
-      | view{"before combine_columns: $it"}
-
-      // Concatenate TSVs into one
-      // and prep the output state.
+      /*
+        Combine the TSV files into one
+        
+        Example of an element in the channel at this stage:
+        
+          [
+            "combined",
+            [
+              input: [ "path/to/output1.tsv", "path/to/output2.tsv" ],
+              _meta: [ join_id: "myid" ]
+            ]
+          ]
+      */
       | combine_columns.run(
-        auto: [ publish: true ],
         fromState: [ input: "input" ],
-        toState: ["output": "output"]
+        toState: [ output: "output" ]
       )
-
-      | view{"after combine_columns: $it"}
 
       // make sure the output state only contains
       // a value called 'output' and '_meta'

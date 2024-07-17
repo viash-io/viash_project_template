@@ -12,12 +12,14 @@ arguments:
     type: file
     required: true
     description: Input TSV file
-    example: file1.tar.gz 
+    example: resources_test/file1.tsv
+
   - name: "--column"
     type: integer
     required: false
     default: 2
     description: The column index to extract from the TSV input file
+
   - name: "--output"
     alternatives: [ "-o" ]
     type: file

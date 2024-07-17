@@ -2791,6 +2791,10 @@ meta = [
           "alternatives" : [
             "-i"
           ],
+          "example" : [
+            "resources_test/file1.tsv",
+            "resources_test/file2.tsv"
+          ],
           "must_exist" : true,
           "create_parent" : true,
           "required" : true,
@@ -2803,6 +2807,9 @@ meta = [
           "name" : "--output",
           "alternatives" : [
             "-o"
+          ],
+          "example" : [
+            "output.tsv"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2924,9 +2931,9 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/template/combine_columns",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "67b3e77ff07fefb186c1ef66434b72ae8deac34a",
+    "git_commit" : "14f1c9c3d86b1822678b22ea862ff7a21cb243c5",
     "git_remote" : "https://github.com/viash-io/viash_project_template",
-    "git_tag" : "v0.2.2-13-g67b3e77"
+    "git_tag" : "v0.2.2-14-g14f1c9c"
   },
   "package_config" : {
     "name" : "project_template",

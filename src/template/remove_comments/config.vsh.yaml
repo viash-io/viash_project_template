@@ -6,7 +6,7 @@ arguments:
     alternatives: [ "-i" ]
     type: file
     required: true
-    example: "file.tsv"
+    example: "resources_test/file1.tsv"
   - name: "--output"
     alternatives: [ "-o" ]
     type: file
