@@ -38,7 +38,6 @@ Check out some of Viash’s key features:
 graph LR
   subgraph component [Viash component]
     subgraph script [Script]
-      direction TD
       rlang[R script]
       python[Python script]
       bash[Bash script]
@@ -62,7 +61,6 @@ graph LR
   nextflow --dependency--> nextflow
 
   subgraph compute [Compute environment]
-    direction TD
     local[Local execution]
     awsbatch[AWS Batch]
     googlebatch[Google Cloud Batch]
