@@ -461,9 +461,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("bit64"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component template combine_columns"
-LABEL org.opencontainers.image.created="2024-07-17T12:38:21Z"
+LABEL org.opencontainers.image.created="2024-07-17T12:39:09Z"
 LABEL org.opencontainers.image.source="https://github.com/viash-io/viash_project_template"
-LABEL org.opencontainers.image.revision="9c86357120732fa58e1acd5e224f93d4545fef11"
+LABEL org.opencontainers.image.revision="58c44ef139f7d92e8c7bccb2512f3c9d375ac970"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
