@@ -4,12 +4,12 @@ echo "Generate test tsv content"
 
 echo ">>> Running tests with only comments"
 
-cat > file1.tsv <<END
+cat > file1.tsv <<EOF
 # This
 #file
 #  only
 # contains comments
-END
+EOF
 
 ./$meta_functionality_name -i file1.tsv -o output1.tsv
 
@@ -18,10 +18,10 @@ END
 
 echo ">>> Running tests with no comments"
 
-cat > file2.tsv <<END2
+cat > file2.tsv <<EOF
 This file contains
 no comments no
-END2
+EOF
 
 ./$meta_functionality_name -i file2.tsv -o output2.tsv
 
@@ -30,10 +30,10 @@ END2
 
 echo ">>> Running tests mixed"
 
-cat > file3.tsv <<END3
+cat > file3.tsv <<EOF
 # This file contains
 no comments no
-END3
+EOF
 
 ./$meta_functionality_name -i file3.tsv -o output3.tsv
 

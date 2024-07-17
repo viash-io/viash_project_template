@@ -1,0 +1,36 @@
+name: take_column
+namespace: template
+
+arguments:
+  - name: "--input"
+    alternatives: [ "-i" ]
+    type: file
+    required: true
+  - name: "--output"
+    alternatives: [ "-o" ]
+    type: file
+    required: true
+    direction: output
+  - name: "--column"
+    type: integer
+    required: false
+    default: 2
+
+resources:
+  - type: python_script
+    path: script.py
+
+engines:
+  - type: docker
+    image: python:3.10-slim
+    setup:
+      - type: python
+        packages: 
+          - pandas
+      - type: apt
+        packages: 
+          - procps
+
+runners:
+  - type: executable
+  - type: nextflow

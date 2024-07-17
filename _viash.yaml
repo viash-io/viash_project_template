@@ -1,11 +1,22 @@
-viash_version: 0.7.1
+# project settings
+name: project_template
+organization: viash-io
+version: dev
 
-source: src
-target: target
+# metadata
+description: |
+  This is a project template for viash projects.
+keywords: [viash, template]
+license: GPL-3.0
+links:
+  repository: https://github.com/viash-io/viash_project_template
+  issue_tracker: https://github.com/viash-io/viash_project_template/issues
+  docker_registry: ghcr.io
+# authors:
+#   - name: Alice
+#     roles: [author, maintainer]
+#   - name: Bob
+#     roles: [author]
 
-config_mods: |
-  .functionality.version := 'dev'
-  .platforms[.type == 'docker'].target_registry := 'ghcr.io'
-  .platforms[.type == 'docker'].target_organization := 'viash-io/viash_project_template'
-  .platforms[.type == 'docker'].target_image_source := 'https://github.com/viash-io/viash_project_template'
-  .platforms[.type == 'nextflow'].directives.tag := '$id'
+# settings
+viash_version: 0.9.0-RC6
