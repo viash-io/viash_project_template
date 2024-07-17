@@ -1,8 +1,8 @@
 
 ## VIASH START
 par <- list(
-    input = c("data/file1.tsv", "data/file2.tsv"),
-    output = "temp/foo.tsv"
+  input = c("resources_test/file1.tsv", "resources_test/file2.tsv"),
+  output = "temp/foo.tsv"
 )
 ## VIASH END
 

@@ -2,9 +2,9 @@ import pandas as pd
 
 ## VIASH START
 par = {
-    "input": "data/file1.tsv",
-    "column": 2,
-    "output": "temp/foo"
+  "input": "resources_test/file1.tsv",
+  "column": 2,
+  "output": "temp/foo"
 }
 ## VIASH END
 
