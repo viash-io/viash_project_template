@@ -1,3 +1,21 @@
+# viash_project_template 0.4.0
+
+* Update to Viash 0.9.0-RC6.
+
+* Update CI to viash-actions@v6.
+
+
+# viash_project_template 0.3.0
+
+* Update to Viash 0.8.2
+
+* `demo_pipeline` is now built from `src/workflow`.
+
+* State management overhaul.
+
+* Use of helper functions (dependencies) from [`vsh_utils`](https://viash-hub.com/data-intuitive/vsh_utils)
+
+
 # viash_project_template 0.2.0
 
 * Update to Viash 0.7.1.
@@ -8,18 +26,19 @@
 
 * Update GitHub Actions.
 
+
 # viash_project_template 0.1.0
 
 First release of the project template repository.
 
 Components:
 
-* `src/demo/remove_comments`: A Bash-based component to remove all lines starting with a comment character `#`.
+* `remove_comments`: A Bash-based component to remove all lines starting with a comment character `#`.
 
-* `src/demo/take_column`: A Python-based component to extract a specific column from a TSV file.
+* `take_column`: A Python-based component to extract a specific column from a TSV file.
 
-* `src/demo/combine_columns`: An R-based component to combine multiple TSV files into one.
+* `combine_columns`: An R-based component to combine multiple TSV files into one.
 
 Pipelines:
 
-* `workflows/demo_pipeline/main.nf`: A demo pipeline which uses abovementioned components.
+* `workflow`: A demo pipeline which uses abovementioned components.
