@@ -2838,6 +2838,13 @@ meta = [
       "is_executable" : true
     }
   ],
+  "test_resources" : [
+    {
+      "type" : "python_script",
+      "path" : "test.py",
+      "is_executable" : true
+    }
+  ],
   "status" : "enabled",
   "license" : "GPL-3.0",
   "links" : {
@@ -2949,9 +2956,9 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/template/take_column",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "14f1c9c3d86b1822678b22ea862ff7a21cb243c5",
+    "git_commit" : "9c86357120732fa58e1acd5e224f93d4545fef11",
     "git_remote" : "https://github.com/viash-io/viash_project_template",
-    "git_tag" : "v0.2.2-14-g14f1c9c"
+    "git_tag" : "v0.2.2-16-g9c86357"
   },
   "package_config" : {
     "name" : "project_template",

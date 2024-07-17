@@ -4,6 +4,10 @@
 
 * Update CI to viash-actions@v6.
 
+* Add unit tests to all components.
+
+* Simplify workflow to not use external dependencies.
+
 
 # viash_project_template 0.3.0
 
@@ -13,7 +17,7 @@
 
 * State management overhaul.
 
-* Use of helper functions (dependencies) from [`vsh_utils`](https://viash-hub.com/data-intuitive/vsh_utils)
+* Use of helper functions (dependencies) from [`vsh_utils`](https://viash-hub.com/data-intuitive/vsh_utils).
 
 
 # viash_project_template 0.2.0

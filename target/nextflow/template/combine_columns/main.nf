@@ -2828,6 +2828,13 @@ meta = [
       "is_executable" : true
     }
   ],
+  "test_resources" : [
+    {
+      "type" : "r_script",
+      "path" : "test.R",
+      "is_executable" : true
+    }
+  ],
   "status" : "enabled",
   "license" : "GPL-3.0",
   "links" : {
@@ -2835,6 +2842,11 @@ meta = [
     "docker_registry" : "ghcr.io"
   },
   "runners" : [
+    {
+      "type" : "executable",
+      "id" : "executable",
+      "docker_setup_strategy" : "ifneedbepullelsecachedbuild"
+    },
     {
       "type" : "nextflow",
       "id" : "nextflow",
@@ -2901,11 +2913,6 @@ meta = [
       },
       "debug" : false,
       "container" : "docker"
-    },
-    {
-      "type" : "executable",
-      "id" : "executable",
-      "docker_setup_strategy" : "ifneedbepullelsecachedbuild"
     }
   ],
   "engines" : [
@@ -2922,6 +2929,16 @@ meta = [
           ],
           "bioc_force_install" : false
         }
+      ],
+      "test_setup" : [
+        {
+          "type" : "r",
+          "packages" : [
+            "processx",
+            "testthat"
+          ],
+          "bioc_force_install" : false
+        }
       ]
     }
   ],
@@ -2931,9 +2948,9 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/template/combine_columns",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "14f1c9c3d86b1822678b22ea862ff7a21cb243c5",
+    "git_commit" : "9c86357120732fa58e1acd5e224f93d4545fef11",
     "git_remote" : "https://github.com/viash-io/viash_project_template",
-    "git_tag" : "v0.2.2-14-g14f1c9c"
+    "git_tag" : "v0.2.2-16-g9c86357"
   },
   "package_config" : {
     "name" : "project_template",
