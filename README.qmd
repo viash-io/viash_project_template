@@ -45,13 +45,14 @@ graph LR
   nextflow[Nextflow workflow]
 
   
-  script & config --- viash_build --> docker_image & executable
+  component --- viash_build --> executable & docker_image & nextflow
   docker_image -.-> executable & nextflow
-  viash_build --> nextflow
+
 
   nextflow --dependency--> nextflow
 
   subgraph compute [Compute environment]
+    direction LR
     local[Local execution]
     awsbatch[AWS Batch]
     googlebatch[Google Cloud Batch]
@@ -176,9 +177,14 @@ Your new repository should contain the following files:
 tree my_first_pipeline
 ```
 
+<details>
+<summary>Output</summary>
+
 ```{bash echo=FALSE}
 tree .
 ```
+
+</details>
 
 ### Step 2: Build the Viash components
 
