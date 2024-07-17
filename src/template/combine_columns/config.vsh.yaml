@@ -20,6 +20,10 @@ resources:
   - type: r_script
     path: script.R
 
+test_resources:
+  - type: r_script
+    path: test.R
+
 engines:
   - type: docker
     image: rocker/r2u:22.04
@@ -27,7 +31,12 @@ engines:
       - type: r
         packages:
           - bit64
+    test_setup:
+      - type: r
+        packages:
+          - processx
+          - testthat
 
 runners:
-  - type: nextflow
   - type: executable
+  - type: nextflow
