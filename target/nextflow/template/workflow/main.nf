@@ -2950,9 +2950,9 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/template/workflow",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "6d5084227369d3435c78f8a80bceec461dad03e4",
+    "git_commit" : "8a5b1de1074b44fb1fea816761320c72418e8cb6",
     "git_remote" : "https://github.com/viash-io/viash_project_template",
-    "git_tag" : "v0.2.2-9-g6d50842"
+    "git_tag" : "v0.2.2-11-g8a5b1de"
   },
   "package_config" : {
     "name" : "project_template",
@@ -2991,11 +2991,15 @@ workflow run_wf {
   main:
     output_ch = input_ch
 
+      | view{"input: $it"}
+
       // Remove comments from each TSV input file
       | remove_comments.run(
         fromState: [ input: "input" ],
         toState: [ output: "output" ]
       )
+
+      | view{"after remove_comments: $it"}
 
       // Extract a single column from each TSV
       // The column to extract is specified in the sample sheet
@@ -3007,25 +3011,35 @@ workflow run_wf {
         toState: [ output: "output" ]
       )
 
+      | view{"after take_column: $it"}
+
       // Combine the given tuples into one
       | toSortedList
 
-      | map { list ->
+      | map { state_list ->
         def new_id = "combined"
         def new_state = [
-          input = list.collect{ id, state -> state.output },
-          _meta: [ join_id: list[0][1] ]
+          input: state_list.collect{ id, state -> state.output },
+          _meta: [ join_id: state_list[0][0] ]
         ]
         [ new_id, new_state ]
       }
+
+      | view{"before combine_columns: $it"}
 
       // Concatenate TSVs into one
       // and prep the output state.
       | combine_columns.run(
         auto: [ publish: true ],
-        fromState: [ input: "output" ],
-        toState: { id, result, state -> result }
+        fromState: [ input: "input" ],
+        toState: ["output": "output"]
       )
+
+      | view{"after combine_columns: $it"}
+
+      // make sure the output state only contains
+      // a value called 'output' and '_meta'
+      | setState(["output", "_meta"])
 
   emit:
     output_ch

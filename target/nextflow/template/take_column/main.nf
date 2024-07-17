@@ -2943,9 +2943,9 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/template/take_column",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "6d5084227369d3435c78f8a80bceec461dad03e4",
+    "git_commit" : "8a5b1de1074b44fb1fea816761320c72418e8cb6",
     "git_remote" : "https://github.com/viash-io/viash_project_template",
-    "git_tag" : "v0.2.2-9-g6d50842"
+    "git_tag" : "v0.2.2-11-g8a5b1de"
   },
   "package_config" : {
     "name" : "project_template",
