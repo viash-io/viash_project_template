@@ -200,13 +200,13 @@ viash ns build --setup cachedbuild --parallel
 This command not only transforms the Viash components in `src/` to Nextflow modules but it also builds the containers when appropriate (starting from the Docker cache when available using the `cachedbuild` argument). Once everything is built, a new **target** directory has been created containing the executables and modules grouped per platform:
 
 ```bash
-ls -l
+tree target
 ```
 
 <details>
 <summary>Output</summary>
 ```{bash echo=FALSE}
-ls -l
+tree target
 ```
 </details>
 
