@@ -80,7 +80,7 @@ jobs:
 
   # phase 2
   docker:
-    name: Build and push Docker images
+    name: Build
     needs: target
 
     runs-on: ubuntu-latest

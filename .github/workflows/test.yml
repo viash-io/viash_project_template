@@ -46,7 +46,7 @@ jobs:
 
   # phase 2
   test:
-    name: Test component
+    name: Test
     needs: list
     if: ${{ needs.list.outputs.matrix != '[]' && needs.list.outputs.matrix != '' }}
     runs-on: ubuntu-latest
