@@ -10,6 +10,7 @@
 
 * Simplify workflow to not use external dependencies.
 
+
 # viash_project_template 0.2.2
 
 ## BUG FIXES
