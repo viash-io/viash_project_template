@@ -1,0 +1,5 @@
+param_list:
+  - id: file1
+    input: resources_test/file1.tsv
+  - id: file2
+    input: resources_test/file2.tsv

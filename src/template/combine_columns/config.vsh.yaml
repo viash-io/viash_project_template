@@ -1,0 +1,42 @@
+name: combine_columns
+namespace: template
+
+arguments:
+  - name: "--input"
+    alternatives: [ "-i" ]
+    type: file
+    multiple: true
+    required: true
+    example: [ resources_test/file1.tsv, resources_test/file2.tsv ]
+
+  - name: "--output"
+    alternatives: [ "-o" ]
+    type: file
+    required: true
+    direction: output
+    example: output.tsv
+
+resources:
+  - type: r_script
+    path: script.R
+
+test_resources:
+  - type: r_script
+    path: test.R
+
+engines:
+  - type: docker
+    image: rocker/r2u:22.04
+    setup:
+      - type: r
+        packages:
+          - bit64
+    test_setup:
+      - type: r
+        packages:
+          - processx
+          - testthat
+
+runners:
+  - type: executable
+  - type: nextflow
