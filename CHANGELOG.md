@@ -1,3 +1,10 @@
+# viash_project_template 0.3.1
+
+## MINOR CHANGES
+
+* Bump Viash version to 0.9.4
+* Fix unit test for `combine_columns`
+
 # viash_project_template 0.3.0
 
 ## MAJOR CHANGES
