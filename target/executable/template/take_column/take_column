@@ -453,9 +453,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component template take_column"
-LABEL org.opencontainers.image.created="2025-06-13T09:34:26Z"
+LABEL org.opencontainers.image.created="2025-06-13T10:07:03Z"
 LABEL org.opencontainers.image.source="https://github.com/viash-io/viash_project_template"
-LABEL org.opencontainers.image.revision="be54504d527822c45e3c2f9a90016fe96b961311"
+LABEL org.opencontainers.image.revision="c54459ef860fb41e839c967468f403b433247d7a"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
