@@ -1,6 +1,6 @@
 name: "combine_columns"
 namespace: "template"
-version: "0.3.0"
+version: "0.3.1"
 argument_groups:
 - name: "Arguments"
   arguments:
@@ -134,18 +134,29 @@ build_info:
   engine: "docker"
   output: "target/executable/template/combine_columns"
   executable: "target/executable/template/combine_columns/combine_columns"
-  viash_version: "0.9.0-RC6"
-  git_commit: "eed4af8549a967b0f4f719fc9e65aa258a784b81"
+  viash_version: "0.9.0"
+  git_commit: "c06c88b95ba4b1e304aab703bee4ced7f02fb6e2"
   git_remote: "https://github.com/viash-io/viash_project_template"
-  git_tag: "v0.2.2-20-geed4af8"
+  git_tag: "v0.2.2-22-gc06c88b"
 package_config:
   name: "project_template"
-  version: "0.3.0"
+  version: "0.3.1"
+  summary: "A project template for viash projects.\n"
   description: "This is a project template for viash projects.\n"
   info: null
-  viash_version: "0.9.0-RC6"
+  viash_version: "0.9.0"
   source: "src"
   target: "target"
+  authors:
+  - name: "Alice"
+    roles:
+    - "author"
+    - "maintainer"
+    info: null
+  - name: "Bob"
+    roles:
+    - "author"
+    info: null
   keywords:
   - "viash"
   - "template"

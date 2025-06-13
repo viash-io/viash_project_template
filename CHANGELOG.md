@@ -1,9 +1,3 @@
-# viash_project_template 0.3.1
-
-## MINOR CHANGES
-
-* Bump version of Viash to 0.9.4
-
 # viash_project_template 0.3.0
 
 ## MAJOR CHANGES
@@ -15,6 +9,7 @@
 * Add unit tests to all components.
 
 * Simplify workflow to not use external dependencies.
+
 
 # viash_project_template 0.2.2
 
