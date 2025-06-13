@@ -1,3 +1,9 @@
+# viash_project_template 0.3.1
+
+## MINOR CHANGES
+
+* Bump version of Viash to 0.9.4
+
 # viash_project_template 0.3.0
 
 ## MAJOR CHANGES
